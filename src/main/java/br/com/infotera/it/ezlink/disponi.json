@@ -1,0 +1,11 @@
+{
+    "checkIn": "2020-02-28",
+    "checkOut": "2020-02-29",
+    "hotelIds": ["5d433db9b9d26646cd01bce9", "5d433dc34da68646fb27e333"],
+    "nationality": "BR",
+    "timeout": 40000,
+    "hotelInfo": true,
+    "rooms": [{
+            "adults": 1
+        }]
+}
