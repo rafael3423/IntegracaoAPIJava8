@@ -35,6 +35,7 @@ import br.com.infotera.it.ezlink.monta.ConsultaReservaWS;
 import br.com.infotera.it.ezlink.monta.DetalheHotelWS;
 import br.com.infotera.it.ezlink.monta.DisponibilidadeWS;
 import br.com.infotera.it.ezlink.monta.PesquisaHotelWS;
+import br.com.infotera.it.ezlink.monta.PreCancelaReservaWS;
 import br.com.infotera.it.ezlink.monta.PreReservarWS;
 import br.com.infotera.it.ezlink.monta.ReservaRelatorioWS;
 import br.com.infotera.it.ezlink.monta.ReservarWS;
@@ -67,7 +68,7 @@ public class MontaWS {
 
     public WSReservaRS consulta(WSReservaRQ consultaReservaRQ) throws ErrorException {
         ConsultaReservaWS consultaReservaWS = new ConsultaReservaWS();
-        return consultaReservaWS.consulta(consultaReservaRQ);
+        return consultaReservaWS.consulta(consultaReservaRQ,false);
     }
 
     public WSReservaRS cancelar(WSReservaRQ cancelaReservaRQ) throws ErrorException {
@@ -85,6 +86,11 @@ public class MontaWS {
         return detalheHotelWS.detalheHotel(detalheHotelRQ);
     }
 
+    public WSReservaRS preCancelar(WSReservaRQ preCancelaReservaRQ) throws ErrorException {
+        PreCancelaReservaWS preCancelaReservaWS = new PreCancelaReservaWS();
+        return preCancelaReservaWS.preCancelaReserva(preCancelaReservaRQ);
+    }
+
     public WSIntegrador login(WSIntegrador wsi) throws ErrorException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -94,10 +100,6 @@ public class MontaWS {
     }
 
     public WSTarifarHotelRS tarifar(WSTarifarHotelRQ wsthrq) throws ErrorException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public WSReservaRS preCancelar(WSReservaRQ wsrrq) throws ErrorException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

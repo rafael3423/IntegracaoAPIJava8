@@ -29,6 +29,7 @@ import br.com.infotera.it.ezlink.rqrs.SearchByDestRS;
 import br.com.infotera.it.ezlink.rqrs.SearchByHotelRQ;
 import br.com.infotera.it.ezlink.rqrs.SearchByHotelRS;
 import com.google.gson.Gson;
+import java.net.URLEncoder;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -246,9 +247,7 @@ public class ChamaWS {
                 try {
                     HotelsRQ hotelsRQ = (HotelsRQ) envio;
 
-                    r = (Response) client.target(endpoint + "static/hotels?skip=" + hotelsRQ.getSkip() + "&limit=" + hotelsRQ.getLimit()
-                            + "&order=" + hotelsRQ.getOrder() + "&destinationId=" + hotelsRQ.getDestinationId() + "&countryISO2="
-                            + hotelsRQ.getCountryISO2() + "&createdUpdated=" + hotelsRQ.getCreatedUpdated())
+                    r = (Response) client.target(endpoint + "static/hotels?hotelIds=" + URLEncoder.encode("[\"" + hotelsRQ.getHotelid() + "\"]", "UTF-8"))
                             .request()
                             .header("Content-Type", "application/json")//poe no header o tipo de estrutura que vai ser postado no site
                             .header("Authorization", integrador.getDsCredencialList().get(0))//posta no header a autorização necessaria do tipo basic com o codigo gerado no encodede

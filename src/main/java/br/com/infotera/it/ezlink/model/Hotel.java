@@ -16,12 +16,48 @@ public class Hotel {
     private String id;
     private String name;
     private List<String> phone;
-    private Integer category;
+    private Double category;
     private Localization localization;
     private List<RoomBooking> rooms;
     private String destinationId;
     private String destination;
     private String countryISO2;
+    private List<Description> description;
+    private List<Media> media;
+    private List<AltIds> altIds;
+    private List<Amenities> amenities;
+
+    public List<Description> getDescription() {
+        return description;
+    }
+
+    public void setDescription(List<Description> description) {
+        this.description = description;
+    }
+
+    public List<Media> getMedia() {
+        return media;
+    }
+
+    public void setMedia(List<Media> media) {
+        this.media = media;
+    }
+
+    public List<AltIds> getAltIds() {
+        return altIds;
+    }
+
+    public void setAltIds(List<AltIds> altIds) {
+        this.altIds = altIds;
+    }
+
+    public List<Amenities> getAmenities() {
+        return amenities;
+    }
+
+    public void setAmenities(List<Amenities> amenities) {
+        this.amenities = amenities;
+    }
 
     public Hotel() {
     }
@@ -50,11 +86,11 @@ public class Hotel {
         this.phone = phone;
     }
 
-    public Integer getCategory() {
+    public Double getCategory() {
         return category;
     }
 
-    public void setCategory(Integer category) {
+    public void setCategory(Double category) {
         this.category = category;
     }
 

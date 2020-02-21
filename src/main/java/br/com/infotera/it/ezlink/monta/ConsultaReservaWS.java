@@ -6,9 +6,12 @@
 package br.com.infotera.it.ezlink.monta;
 
 import br.com.infotera.common.ErrorException;
+import br.com.infotera.common.WSReserva;
+import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.reserva.rqrs.WSReservaRQ;
 import br.com.infotera.common.reserva.rqrs.WSReservaRS;
 import br.com.infotera.it.ezlink.ChamaWS;
+import br.com.infotera.it.ezlink.UtilsWS;
 import br.com.infotera.it.ezlink.rqrs.DetailsRQ;
 import br.com.infotera.it.ezlink.rqrs.DetailsRS;
 
@@ -18,16 +21,21 @@ import br.com.infotera.it.ezlink.rqrs.DetailsRS;
  */
 public class ConsultaReservaWS {
     
-        ChamaWS chamaWS = new ChamaWS();
-    
-        public WSReservaRS consulta(WSReservaRQ consultaReservaRQ) throws ErrorException {
+    UtilsWS utilsWS = new UtilsWS();
+    ChamaWS chamaWS = new ChamaWS();
 
-        DetailsRQ detailsRQ = new DetailsRQ(1074);
+    public WSReservaRS consulta(WSReservaRQ consultaReservaRQ, Boolean isCancelamento) throws ErrorException {
 
-        chamaWS.chamadaPadrao(consultaReservaRQ.getIntegrador(), detailsRQ, DetailsRS.class);
+        DetailsRQ detailsRQ = new DetailsRQ(Integer.parseInt(consultaReservaRQ.getReserva().getReservaHotel().getNrLocalizador()));
 
-        return null;
+        DetailsRS detailsRS = chamaWS.chamadaPadrao(consultaReservaRQ.getIntegrador(), detailsRQ, DetailsRS.class);
+
+        WSReserva reserva = utilsWS.montaReserva(consultaReservaRQ.getIntegrador(), detailsRS.getBooking(), isCancelamento);
+
+        return new WSReservaRS(reserva, consultaReservaRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);
 
     }
-    
+
+
+
 }

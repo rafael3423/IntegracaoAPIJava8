@@ -5,6 +5,7 @@
  */
 package br.com.infotera.it.ezlink.rqrs;
 
+import br.com.infotera.it.ezlink.model.Booking;
 import br.com.infotera.it.ezlink.model.CancelledBooking;
 
 /**
@@ -13,16 +14,16 @@ import br.com.infotera.it.ezlink.model.CancelledBooking;
  */
 public class CancelRS {
 
-    private CancelledBooking cancelledBooking;
+    private Booking cancelledBooking;
 
     public CancelRS() {
     }
 
-    public CancelledBooking getCancelledBooking() {
+    public Booking getCancelledBooking() {
         return cancelledBooking;
     }
 
-    public void setCancelledBooking(CancelledBooking cancelledBooking) {
+    public void setCancelledBooking(Booking cancelledBooking) {
         this.cancelledBooking = cancelledBooking;
     }
 

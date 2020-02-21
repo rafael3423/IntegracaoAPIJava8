@@ -5,6 +5,8 @@
  */
 package br.com.infotera.it.ezlink.model;
 
+import java.util.List;
+
 /**
  *
  * @author rafael
@@ -18,7 +20,7 @@ public class RoomBooking {
     private String name;
     private String board;
     private Price price;
-    private Pax pax;
+    private List<Pax> pax;
     private CancellationPolicies cancellationPolicies;
     private String remarks;
 
@@ -81,11 +83,11 @@ public class RoomBooking {
         this.price = price;
     }
 
-    public Pax getPax() {
+    public List<Pax> getPax() {
         return pax;
     }
 
-    public void setPax(Pax pax) {
+    public void setPax(List<Pax> pax) {
         this.pax = pax;
     }
 

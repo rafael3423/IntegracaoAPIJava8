@@ -18,6 +18,27 @@ public class HotelsRQ {
     private String countryISO2;
     private String createdUpdated;
     public HotelsRQ hotelsRQ;
+    private String hotelid;
+
+    public HotelsRQ getHotelsRQ() {
+        return hotelsRQ;
+    }
+
+    public void setHotelsRQ(HotelsRQ hotelsRQ) {
+        this.hotelsRQ = hotelsRQ;
+    }
+
+    public String getHotelid() {
+        return hotelid;
+    }
+
+    public void setHotelid(String hotelid) {
+        this.hotelid = hotelid;
+    }
+
+    public HotelsRQ(String hotelid) {
+        this.hotelid = hotelid;
+    }
 
     public HotelsRQ() {
     }

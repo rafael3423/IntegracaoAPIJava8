@@ -1,11 +1,145 @@
 {
-    "checkIn": "2020-02-28",
-    "checkOut": "2020-02-29",
-    "hotelIds": ["5d433db9b9d26646cd01bce9", "5d433dc34da68646fb27e333"],
-    "nationality": "BR",
-    "timeout": 40000,
-    "hotelInfo": true,
-    "rooms": [{
-            "adults": 1
-        }]
+    "hotelListResponse": {
+        "totalAfterFilter": 1,
+        "query": {
+            "hotelIds": ["5d433db9b9d26646cd01bce9"]
+        },
+        "hotelListResults": {
+            "hotels": [{
+                    "id": "5d433db9b9d26646cd01bce9",
+                    "name": "Hotel Gran Legazpi",
+                    "category": 3,
+                    "localization": {
+                        "address": "Paseo de la Chopera, 71",
+                        "coordinates": [-3.69599, 40.39176]
+                    },
+                    "destination": "5d652a0e37f0a05da7a94a8e",
+                    "countryISO2": "ES",
+                    "description": [{
+                            "language": "en",
+                            "text": "With a stay at Hotel Gran Legazpi in Madrid (Arganzuela), you'll be convenient to Madrid Planetarium and Prado Museum.  This hotel is within close proximity of Teatro Circo Price and Museo Nacional Centro de Arte Reina Sofia.\n\nMake yourself at home in one of the 91 air-conditioned rooms featuring LCD televisions. Complimentary wireless Internet access is available to keep you connected. Private bathrooms with shower/tub combinations feature complimentary toiletries and hair dryers. Conveniences include phones and safes, and you can also request irons/ironing boards.   Amenities   Make use of convenient amenities, which include complimentary wireless Internet access and tour/ticket assistance.\n\nSatisfy your appetite at a coffee shop/café serving guests of Hotel Gran Legazpi.\n\nFeatured amenities include a 24-hour business center, express check-in, and express check-out. Self parking (subject to charges) is available onsite."
+                        }, {
+                            "language": "es",
+                            "text": "Si te alojas en Hotel Gran Legazpi, en Madrid (Arganzuela), podrás llegar fácilmente a Planetario de Madrid y a Museo del Prado.  Este hotel se encuentra cerca de Teatro Circo Price y de Museo Nacional Centro de Arte Reina Sofía.\n\nTe sentirás como en tu propia casa en una de las 91 habitaciones con aire acondicionado y televisor LCD. Mantén el contacto con los tuyos gracias a la conexión a Internet wifi gratis. El baño privado con ducha y bañera combinadas está provisto de artículos de higiene personal gratuitos y secador de pelo. Las comodidades incluyen teléfono, caja fuerte y la posibilidad de solicitar tabla de planchar con plancha.   Servicios   Aprovecha los prácticos servicios que se te ofrecen, como conexión a Internet wifi gratis o asistencia turística y para la compra de entradas.   Para comer   Si tienes hambre, pasa por la cafetería.\n\nTendrás centro de negocios abierto las 24 horas, check-in rápido y check-out rápido a tu disposición. Hay un aparcamiento sin asistencia (de pago) disponible."
+                        }, {
+                            "language": "pt_br",
+                            "text": "Este hotel localiza-se nas imediações do centro comercial, cultural e financeiro de Madrid, junto à emblemática Plaza de Legazpi. O centro da cidade (Plaza del Sol) fica a 1,5 km. Nas imediações encontram-se ligações à rede de transportes públicos. O terminal rodoviário fica a aproximadamente 1 km e a estação de comboios a cerca de 1,5 km.\n\nEste moderno hotel de 91 quartos foi renovado em 2004. É totalmente insonorizado e conta com acabamentos em mármore vermelho de Alicante e mobiliário de madeira da Guiné. O acesso à Internet sem fios encontra-se ao dispor, bem como os serviços de aluguer automóvel e de reserva de bilhetes na receção aberta 24 horas por dia. O hotel urbano climatizado dispõe de hall de entrada com receção e serviço de check-out 24 h por dia, cofre, elevador, café, bar, sala de refeições, sala de conferências e serviço de lavandaria. Existe ainda ao dispor um serviço de aluguer de bicicletas e, para hóspedes com viatura própria, um parque de estacionamento ou garagem.\n\nOs quartos compreendem casa de banho privativa com duche e secador de cabelo, telefone com ligação direta, televisão, rádio, acesso à Internet, minibar e ar condicionado/aquecimento reguláveis individualmente. O cofre é outra das ofertas padrão.\n\nSerá servido um buffet de pequeno-almoço diariamente."
+                        }],
+                    "amenities": [],
+                    "media": [{
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac4204.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac4200.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41fc.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41f8.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41f4.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41f0.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41ec.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41e8.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41e4.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41e0.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41dc.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41d8.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41d4.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41d0.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41cc.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41c8.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41c4.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41c0.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41bc.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41b8.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41b4.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41b0.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41ac.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41a8.jpg"
+                        }, {
+                            "description": [],
+                            "type": "image",
+                            "url": "https://ezconnect.s3-us-west-2.amazonaws.com/media/5d433db9b9d26646cd01bce9/5d6d2bedc7185a7af6ac41a4.jpg"
+                        }],
+                    "altIds": {
+                            "name": "hb",
+                            "eqId": "147191"
+                        }, {
+                            "name": "exp",
+                            "eqId": "228121"
+                        }, {
+                            "name": "t4c",
+                            "eqId": "61289"
+                        }],
+                    "createdAt": "2019-09-02T14:49:17.429Z",
+                    "updatedAt": "2020-02-19T22:12:27.942Z"
+                }]
+        }
+    }
 }

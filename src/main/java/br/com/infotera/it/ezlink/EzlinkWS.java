@@ -11,6 +11,7 @@ import br.com.infotera.common.WSPreAlterarRQ;
 import br.com.infotera.common.WSPreAlterarRS;
 import br.com.infotera.common.WSPreReservarRQ;
 import br.com.infotera.common.WSPreReservarRS;
+import br.com.infotera.common.WSReserva;
 import br.com.infotera.common.WSReservaRelatorioRQ;
 import br.com.infotera.common.WSReservaRelatorioRS;
 import br.com.infotera.common.destino.rqrs.WSDestinoRQ;
@@ -88,7 +89,7 @@ public class EzlinkWS implements HotelImpl {
     @Override
     public WSReservaRS cancelar(WSReservaRQ cancelaReservaRQ) throws ErrorException {
         try {
-            return montaWS.consulta(cancelaReservaRQ);
+            return montaWS.cancelar(cancelaReservaRQ);
         } catch (ErrorException ex) {
             return new WSReservaRS(null, ex.getIntegrador());
         }
@@ -113,6 +114,15 @@ public class EzlinkWS implements HotelImpl {
     }
 
     @Override
+    public WSReservaRS preCancelar(WSReservaRQ preCancelaReservaRQ) throws ErrorException {
+               try {
+            return montaWS.preCancelar(preCancelaReservaRQ);
+        } catch (ErrorException ex) {
+            return new WSReservaRS(null, ex.getIntegrador());
+        }
+    }
+
+    @Override
     public WSIntegrador login(WSIntegrador wsi) throws ErrorException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -124,11 +134,6 @@ public class EzlinkWS implements HotelImpl {
 
     @Override
     public WSTarifarHotelRS tarifar(WSTarifarHotelRQ wsthrq) throws ErrorException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public WSReservaRS preCancelar(WSReservaRQ wsrrq) throws ErrorException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

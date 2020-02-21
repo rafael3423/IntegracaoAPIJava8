@@ -5,12 +5,15 @@
  */
 package br.com.infotera.it.ezlink.model;
 
+import java.util.List;
+
 /**
  *
  * @author rafael
  */
 public class Query {
 
+    private List<String> hotelIds;
     private String customerBookingId;
     private Integer skip;
     private Integer limit;
@@ -20,6 +23,14 @@ public class Query {
     private String destinationId;
 
     public Query() {
+    }
+
+    public List<String> getHotelIds() {
+        return hotelIds;
+    }
+
+    public void setHotelIds(List<String> hotelIds) {
+        this.hotelIds = hotelIds;
     }
 
     public String getCustomerBookingId() {

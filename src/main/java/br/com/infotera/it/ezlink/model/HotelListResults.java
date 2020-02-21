@@ -13,17 +13,16 @@ import java.util.List;
  */
 public class HotelListResults {
 
-    private List<String> hotels;
+    private List<Hotel> hotels;
 
     public HotelListResults() {
     }
 
-    public List<String> getHotels() {
+    public List<Hotel> getHotels() {
         return hotels;
     }
 
-    public void setHotels(List<String> hotels) {
+    public void setHotels(List<Hotel> hotels) {
         this.hotels = hotels;
     }
-
 }

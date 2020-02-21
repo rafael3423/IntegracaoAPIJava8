@@ -7,14 +7,11 @@ package br.com.infotera.it.ezlink.monta;
 
 import br.com.infotera.common.ErrorException;
 import br.com.infotera.common.WSEndereco;
-import br.com.infotera.common.WSIdHotel;
-import br.com.infotera.common.WSReservaHotel;
 import br.com.infotera.common.WSReservaNome;
 import br.com.infotera.common.WSTarifa;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
-import br.com.infotera.common.enumerator.WSPagtoFornecedorTipoEnum;
+import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.hotel.WSConfigUh;
-import br.com.infotera.common.hotel.WSConfigUhIdade;
 import br.com.infotera.common.hotel.WSHotel;
 import br.com.infotera.common.hotel.WSHotelCategoria;
 import br.com.infotera.common.hotel.WSHotelPesquisa;
@@ -25,22 +22,14 @@ import br.com.infotera.common.hotel.WSUh;
 import br.com.infotera.common.hotel.rqrs.WSDisponibilidadeHotelRQ;
 import br.com.infotera.common.hotel.rqrs.WSDisponibilidadeHotelRS;
 import br.com.infotera.common.politica.WSPolitica;
-import br.com.infotera.common.politica.WSPoliticaCancelamento;
 import br.com.infotera.common.util.Utils;
 import br.com.infotera.it.ezlink.ChamaWS;
-import br.com.infotera.it.ezlink.model.Hotel;
-import br.com.infotera.it.ezlink.model.Penalt;
+import br.com.infotera.it.ezlink.UtilsWS;
 import br.com.infotera.it.ezlink.model.Room;
 import br.com.infotera.it.ezlink.model.SearchResults;
-import br.com.infotera.it.ezlink.rqrs.QuoteRQ;
-import br.com.infotera.it.ezlink.rqrs.QuoteRS;
-import br.com.infotera.it.ezlink.rqrs.SearchByDestRQ;
-import br.com.infotera.it.ezlink.rqrs.SearchByDestRS;
 import br.com.infotera.it.ezlink.rqrs.SearchByHotelRQ;
 import br.com.infotera.it.ezlink.rqrs.SearchByHotelRS;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,26 +51,22 @@ public class DisponibilidadeWS {
      * este metodo faz a disponibilidade
      */
     public WSDisponibilidadeHotelRS disponibilidade(WSDisponibilidadeHotelRQ disponibilidadeRQ) throws ErrorException {
-
-        
+        String metodo = "disponibilidade";
         List<String> hotelIdsList = new ArrayList();
         List<Room> roomList = new ArrayList();
 
-        
-        
         for (WSHotel hid : disponibilidadeRQ.getHotelList()) { // Abre a lista de hotel enviado pelo dispRQ e vai colocando no hotelIdsList
             hotelIdsList.add(hid.getIdExterno());
         }
 
-        
         Map<Integer, WSConfigUh> configUhMap = new LinkedHashMap(); // Configura o Map novo com a chave de int, do tipo WSConfigUh
 
         int sqConfigUh = 0;
 
         /**
-         * Abre a lista de Config UhList enviado pelo dispRQ e vai adicionando na roomList
+         * Abre a lista de Config UhList enviado pelo dispRQ e vai adicionando
+         * na roomList
          */
-        
         for (WSConfigUh cuh : disponibilidadeRQ.getConfigUhList()) { //abre a lista de quarto e vai rodando no cuh do tipo WSConfigUh
 
             sqConfigUh++;
@@ -96,15 +81,21 @@ public class DisponibilidadeWS {
                 if (rn.getPaxTipo().isAdt() || rn.getPaxTipo().isSrn()) { // checha se o hospede é adulto ou senhor
                     qtADT++; // adiciona como adulto
                 } else {// checha se o hospede é criança
+                    if(rn.getQtIdade()<12){
                     qtCHD++; //Adiciona criança
-                    idadeCriancaList.add(rn.getQtIdade()); //define a idade da criança
+                    idadeCriancaList.add(rn.getQtIdade());} //define a idade da criança
+                    else throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Idade máxima para crianças: 11 anos", WSIntegracaoStatusEnum.NEGADO, null);
                 }
+
             }
 
             if (qtCHD == 0) {//checa se a quatidade de criança é 0
                 qtCHD = null;//define como nulo 
                 idadeCriancaList = null;// define como nulo
             }
+
+
+
             roomList.add(new Room(qtADT, qtCHD, idadeCriancaList));
         }
 
@@ -121,7 +112,7 @@ public class DisponibilidadeWS {
                 roomList);
 
         SearchByHotelRS searchByHotelRS = chamaWS.chamadaPadrao(disponibilidadeRQ.getIntegrador(), searchByHotelRQ, SearchByHotelRS.class);
-        
+
         List<WSHotelPesquisa> hotelPesquisaList = new ArrayList();
         int sqPesquisa = 0;
         /**
@@ -131,7 +122,7 @@ public class DisponibilidadeWS {
         if (searchByHotelRS != null && searchByHotelRS.getSearchResponse() != null && searchByHotelRS.getSearchResponse().getSearchResults() != null) {
 
             for (SearchResults sr : searchByHotelRS.getSearchResponse().getSearchResults()) {//Abre a lista de SearchResults e roda no sr  
-                
+
                 sqPesquisa++;
 
                 List<WSQuarto> quartoList = new ArrayList();
@@ -143,6 +134,7 @@ public class DisponibilidadeWS {
                 for (List<Room> rList : sr.getRooms()) {
 
                     sqQuarto++;
+
                     List<WSQuartoUh> quartoUhList = new ArrayList();
 
                     /**
@@ -150,39 +142,15 @@ public class DisponibilidadeWS {
                      */
                     for (Room r : rList) {
 
-                        List<WSPolitica> politicaCancelamentoList = new ArrayList();
-
-                        /**
-                         * Abre a Lista de cancellationPolicies para preencher
-                         * politicaCancelamentoList
-                         */
-                        if (r.getCancellationPolicies() != null && r.getCancellationPolicies().getPenalties() != null) {
-                            for (Penalt p : r.getCancellationPolicies().getPenalties()) {
-
-                                Date dtMaximaCancelamento = Utils.addDias(Utils.toDate(p.getFrom(), "yyyy-MM-dd'T'HH:mm:ss"), -3);
-
-                                boolean stImediata = false; //Inicia Multa em normalmente falso
-
-                                if (new Date().compareTo(dtMaximaCancelamento) == 1) { //Compara se o dia de hoje passou a data máxima de ccanelmento
-                                    stImediata = true;  // entra em multa
-                                }
-
-                                if (r.getRefundable() == false) { // checa se o conector tem prazo de cancelamento
-                                    stImediata = true; // entra em multa
-                                }
-
-                                politicaCancelamentoList.add(new WSPoliticaCancelamento("Cancelamento",
-                                        null,
-                                        p.getPrice().getCurrency(),
-                                        p.getPrice().getValue(),
-                                        null,
-                                        dtMaximaCancelamento,
-                                        null,
-                                        stImediata));
-
-                            }
-
-                        }
+                UtilsWS utils = new UtilsWS();
+                
+                List<WSPolitica> politicaCancelamentoList = new ArrayList();
+                
+                if (r.getCancellationPolicies() != null) {
+                    politicaCancelamentoList = utils.politicaCancelamento(r.getCancellationPolicies().getPenalties(),
+                            r.getRefundable(),
+                            r.getRemarks());
+                }
 
                         /**
                          * Seta tarifa com a moeda, preço e a lista de polica de
@@ -208,6 +176,7 @@ public class DisponibilidadeWS {
                                         r.getBoard().getBoardName()),
                                 tarifa,
                                 null));
+
                     }
 
                     quartoList.add(new WSQuarto(sqQuarto, configUhMap.get(sqQuarto), quartoUhList)); //Poe dentro QuartoList o numero do WSQuarto, a ordem do WSQuarto, o QuartoUhList com WSQuartoUhs
@@ -231,6 +200,7 @@ public class DisponibilidadeWS {
                         quartoList,
                         sqPesquisa,
                         searchByHotelRS.getSearchResponse().getSearchToken()));
+
             }
         }
 
@@ -238,7 +208,6 @@ public class DisponibilidadeWS {
          * Retorna para o infortravel a Lista de pesquisas de hotel, o integrado
          * que foi enviado, e o status de integração como oK
          */
-        
         return new WSDisponibilidadeHotelRS(hotelPesquisaList, disponibilidadeRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);
 
     }

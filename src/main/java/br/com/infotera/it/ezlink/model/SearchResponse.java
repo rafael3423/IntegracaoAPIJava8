@@ -20,6 +20,15 @@ public class SearchResponse {
     private Integer responseTime;
     private SearchQuery searchQuery;
     private List<SearchResults> searchResults;
+    private List<Room> rooms;
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
+    }
 
     public SearchResponse() {
     }
