@@ -11,6 +11,7 @@ import br.com.infotera.common.WSReservaHotel;
 import br.com.infotera.common.WSReservaHotelUh;
 import br.com.infotera.common.WSReservaNome;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
+import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.enumerator.WSPaxTipoEnum;
 import br.com.infotera.common.reserva.rqrs.WSReservaRQ;
 import br.com.infotera.common.reserva.rqrs.WSReservaRS;
@@ -40,16 +41,23 @@ public class ReservarWS {
         List<Room> roomList = new ArrayList();
         List<Pax> paxList = new ArrayList();
 
-        for (WSReservaHotelUh rhuh : reservarRQ.getReserva().getReservaHotel().getReservaHotelUhList()) {
-            for (WSReservaNome rn : rhuh.getReservaNomeList()) {
-                String paxTipo;
-                if(rn.getPaxTipo().equals(WSPaxTipoEnum.ADT)){
-                    paxTipo = "ADT";                  
-                }else paxTipo = "CHD";
+        try {
 
-                paxList.add(new Pax(rn.getNmNome(), rn.getNmSobrenome(), rn.getQtIdade(),paxTipo));
+            for (WSReservaHotelUh rhuh : reservarRQ.getReserva().getReservaHotel().getReservaHotelUhList()) {
+                for (WSReservaNome rn : rhuh.getReservaNomeList()) {
+                    String paxTipo;
+                    if (rn.getPaxTipo().equals(WSPaxTipoEnum.ADT)) {
+                        paxTipo = "ADT";
+                    } else {
+                        paxTipo = "CHD";
+                    }
+
+                    paxList.add(new Pax(rn.getNmNome(), rn.getNmSobrenome(), rn.getQtIdade(), paxTipo));
+                }
+                roomList.add(new Room(rhuh.getUh().getDsParametro(), paxList));
             }
-            roomList.add(new Room(rhuh.getUh().getDsParametro(), paxList));
+        } catch (Exception ex) {
+            throw new ErrorException(reservarRQ.getIntegrador(), ReservaRelatorioWS.class, "reserva", WSMensagemErroEnum.HRE, "Ocorreu uma falha ao efetuar a reserva do quarto ", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         BookRQ bookRQ = new BookRQ(

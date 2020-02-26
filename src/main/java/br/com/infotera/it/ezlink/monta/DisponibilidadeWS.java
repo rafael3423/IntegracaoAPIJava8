@@ -51,12 +51,17 @@ public class DisponibilidadeWS {
      * este metodo faz a disponibilidade
      */
     public WSDisponibilidadeHotelRS disponibilidade(WSDisponibilidadeHotelRQ disponibilidadeRQ) throws ErrorException {
+        
         String metodo = "disponibilidade";
         List<String> hotelIdsList = new ArrayList();
         List<Room> roomList = new ArrayList();
+        try {
 
-        for (WSHotel hid : disponibilidadeRQ.getHotelList()) { // Abre a lista de hotel enviado pelo dispRQ e vai colocando no hotelIdsList
-            hotelIdsList.add(hid.getIdExterno());
+            for (WSHotel hid : disponibilidadeRQ.getHotelList()) { // Abre a lista de hotel enviado pelo dispRQ e vai colocando no hotelIdsList
+                hotelIdsList.add(hid.getIdExterno());
+            }
+        } catch (Exception ex) {
+            throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, "disponibilidade", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao consultar os hóteis disponiveis", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         Map<Integer, WSConfigUh> configUhMap = new LinkedHashMap(); // Configura o Map novo com a chave de int, do tipo WSConfigUh
@@ -67,36 +72,42 @@ public class DisponibilidadeWS {
          * Abre a lista de Config UhList enviado pelo dispRQ e vai adicionando
          * na roomList
          */
-        for (WSConfigUh cuh : disponibilidadeRQ.getConfigUhList()) { //abre a lista de quarto e vai rodando no cuh do tipo WSConfigUh
+        try {
 
-            sqConfigUh++;
-            configUhMap.put(sqConfigUh, cuh);
+            for (WSConfigUh cuh : disponibilidadeRQ.getConfigUhList()) { //abre a lista de quarto e vai rodando no cuh do tipo WSConfigUh
 
-            List<Integer> idadeCriancaList = new ArrayList();
+                sqConfigUh++;
+                configUhMap.put(sqConfigUh, cuh);
 
-            int qtADT = 0;
-            Integer qtCHD = 0;
+                List<Integer> idadeCriancaList = new ArrayList();
 
-            for (WSReservaNome rn : cuh.getReservaNomeList()) { //abre a lista de nome e vai rodando no rn do tipo WSReservaNome
-                if (rn.getPaxTipo().isAdt() || rn.getPaxTipo().isSrn()) { // checha se o hospede é adulto ou senhor
-                    qtADT++; // adiciona como adulto
-                } else {// checha se o hospede é criança
-                    if(rn.getQtIdade()<12){
-                    qtCHD++; //Adiciona criança
-                    idadeCriancaList.add(rn.getQtIdade());} //define a idade da criança
-                    else throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Idade máxima para crianças: 11 anos", WSIntegracaoStatusEnum.NEGADO, null);
+                int qtADT = 0;
+                Integer qtCHD = 0;
+
+                for (WSReservaNome rn : cuh.getReservaNomeList()) { //abre a lista de nome e vai rodando no rn do tipo WSReservaNome
+                    if (rn.getPaxTipo().isAdt() || rn.getPaxTipo().isSrn()) { // checha se o hospede é adulto ou senhor
+                        qtADT++; // adiciona como adulto
+                    } else {// checha se o hospede é criança
+                        if (rn.getQtIdade() < 12) {
+                            qtCHD++; //Adiciona criança
+                            idadeCriancaList.add(rn.getQtIdade());
+                        } //define a idade da criança
+                        else {
+                            throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Idade máxima para crianças: 11 anos", WSIntegracaoStatusEnum.NEGADO, null);
+                        }
+                    }
+
                 }
 
+                if (qtCHD == 0) {//checa se a quatidade de criança é 0
+                    qtCHD = null;//define como nulo 
+                    idadeCriancaList = null;// define como nulo
+                }
+
+                roomList.add(new Room(qtADT, qtCHD, idadeCriancaList));
             }
-
-            if (qtCHD == 0) {//checa se a quatidade de criança é 0
-                qtCHD = null;//define como nulo 
-                idadeCriancaList = null;// define como nulo
-            }
-
-
-
-            roomList.add(new Room(qtADT, qtCHD, idadeCriancaList));
+        } catch (Exception ex) {
+            throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, "disponibilidade", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao consultar os hóteis disponiveis", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         String dtcheckIn = Utils.formatData(disponibilidadeRQ.getDtEntrada(), "yyyy-MM-dd"); // Converte para string a data check in fornecida pelo infotravel
@@ -118,90 +129,105 @@ public class DisponibilidadeWS {
         /**
          * Abre a Lista de SearchResults para preencher WSHotelPesquisa
          */
+        try {
 
-        if (searchByHotelRS != null && searchByHotelRS.getSearchResponse() != null && searchByHotelRS.getSearchResponse().getSearchResults() != null) {
+            if (searchByHotelRS != null && searchByHotelRS.getSearchResponse() != null && searchByHotelRS.getSearchResponse().getSearchResults() != null) {
 
-            for (SearchResults sr : searchByHotelRS.getSearchResponse().getSearchResults()) {//Abre a lista de SearchResults e roda no sr  
+                for (SearchResults sr : searchByHotelRS.getSearchResponse().getSearchResults()) {//Abre a lista de SearchResults e roda no sr  
 
-                sqPesquisa++;
+                    sqPesquisa++;
 
-                List<WSQuarto> quartoList = new ArrayList();
-                int sqQuarto = 0;
-
-                /**
-                 * Abre a lista de rooms para preencher quartoList
-                 */
-                for (List<Room> rList : sr.getRooms()) {
-
-                    sqQuarto++;
-
-                    List<WSQuartoUh> quartoUhList = new ArrayList();
+                    List<WSQuarto> quartoList = new ArrayList();
+                    int sqQuarto = 0;
 
                     /**
-                     * Abre a lista na lista rooms para preencher QuartoUhList
+                     * Abre a lista de rooms para preencher quartoList
                      */
-                    for (Room r : rList) {
+                    try {
 
-                UtilsWS utils = new UtilsWS();
-                
-                List<WSPolitica> politicaCancelamentoList = new ArrayList();
-                
-                if (r.getCancellationPolicies() != null) {
-                    politicaCancelamentoList = utils.politicaCancelamento(r.getCancellationPolicies().getPenalties(),
-                            r.getRefundable(),
-                            r.getRemarks());
-                }
+                        for (List<Room> rList : sr.getRooms()) {
 
-                        /**
-                         * Seta tarifa com a moeda, preço e a lista de polica de
-                         * cancelamento
-                         */
-                        WSTarifa tarifa = new WSTarifa(r.getPrice().getCurrency(),
-                                r.getPrice().getValue(),
-                                null,
-                                null);
-                        tarifa.setPoliticaList(politicaCancelamentoList);
+                            sqQuarto++;
 
-                        /**
-                         * Seta QuartoUhList com WSQuartoUh
-                         */
-                        quartoUhList.add(new WSQuartoUh( // Seta WSQuatoUh com WSUh, WSRegime e WSTarifa
-                                new WSUh(null,
-                                        r.getRoomId(),
-                                        r.getRoomName(),
-                                        r.getRoomName(),
-                                        r.getRoomId()),
-                                new WSRegime(r.getBoard().getBoardCode().toString(),
-                                        r.getBoard().getBoardCode().toString(),
-                                        r.getBoard().getBoardName()),
-                                tarifa,
-                                null));
+                            List<WSQuartoUh> quartoUhList = new ArrayList();
 
+                            /**
+                             * Abre a lista na lista rooms para preencher
+                             * QuartoUhList
+                             */
+                            try {
+
+                                for (Room r : rList) {
+
+                                    UtilsWS utils = new UtilsWS();
+
+                                    List<WSPolitica> politicaCancelamentoList = new ArrayList();
+
+                                    if (r.getCancellationPolicies() != null) {
+                                        politicaCancelamentoList = utils.politicaCancelamento(r.getCancellationPolicies().getPenalties(),
+                                                r.getRefundable(),
+                                                r.getRemarks());
+                                    }
+
+                                    /**
+                                     * Seta tarifa com a moeda, preço e a lista
+                                     * de polica de cancelamento
+                                     */
+                                    WSTarifa tarifa = new WSTarifa(r.getPrice().getCurrency(),
+                                            r.getPrice().getValue(),
+                                            null,
+                                            null);
+                                    tarifa.setPoliticaList(politicaCancelamentoList);
+
+                                    /**
+                                     * Seta QuartoUhList com WSQuartoUh
+                                     */
+                                    quartoUhList.add(new WSQuartoUh( // Seta WSQuatoUh com WSUh, WSRegime e WSTarifa
+                                            new WSUh(null,
+                                                    r.getRoomId(),
+                                                    r.getRoomName(),
+                                                    r.getRoomName(),
+                                                    r.getRoomId()),
+                                            new WSRegime(r.getBoard().getBoardCode().toString(),
+                                                    r.getBoard().getBoardCode().toString(),
+                                                    r.getBoard().getBoardName()),
+                                            tarifa,
+                                            null));
+
+                                }
+                            } catch (Exception ex) {
+                                throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, "disponibilidade", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao consultar os hóteis disponiveis", WSIntegracaoStatusEnum.NEGADO, ex);
+                            }
+
+                            quartoList.add(new WSQuarto(sqQuarto, configUhMap.get(sqQuarto), quartoUhList)); //Poe dentro QuartoList o numero do WSQuarto, a ordem do WSQuarto, o QuartoUhList com WSQuartoUhs
+                        }
+                    } catch (Exception ex) {
+                        throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, "disponibilidade", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao consultar os hóteis disponiveis", WSIntegracaoStatusEnum.NEGADO, ex);
                     }
 
-                    quartoList.add(new WSQuarto(sqQuarto, configUhMap.get(sqQuarto), quartoUhList)); //Poe dentro QuartoList o numero do WSQuarto, a ordem do WSQuarto, o QuartoUhList com WSQuartoUhs
+                    /**
+                     * Adiciona à lista hotelPesquisaList todos componentes do
+                     * WSHotelPesquisa
+                     */
+                    hotelPesquisaList.add(new WSHotelPesquisa(null,
+                            Utils.toDate(searchByHotelRS.getSearchResponse().getSearchQuery().getCheckIn(), "yyyy-MM-dd"),
+                            Utils.toDate(searchByHotelRS.getSearchResponse().getSearchQuery().getCheckOut(), "yyyy-MM-dd"),
+                            new WSHotel(sr.getHotelId(),
+                                    sr.getHotelName(),
+                                    null,
+                                    new WSHotelCategoria(sr.getCategory(), null),
+                                    null,
+                                    null,
+                                    new WSEndereco(sr.getLocalization().getAddress(), null, sr.getLocalization().getDestination(), null, sr.getLocalization().getCountryISO2(), "", sr.getLocalization().getCoordinates().get(0).toString(), sr.getLocalization().getCoordinates().get(1).toString()),
+                                    null),
+                            quartoList,
+                            sqPesquisa,
+                            searchByHotelRS.getSearchResponse().getSearchToken()));
+
                 }
-
-                /**
-                 * Adiciona à lista hotelPesquisaList todos componentes do
-                 * WSHotelPesquisa
-                 */
-                hotelPesquisaList.add(new WSHotelPesquisa(null,
-                        Utils.toDate(searchByHotelRS.getSearchResponse().getSearchQuery().getCheckIn(), "yyyy-MM-dd"),
-                        Utils.toDate(searchByHotelRS.getSearchResponse().getSearchQuery().getCheckOut(), "yyyy-MM-dd"),
-                        new WSHotel(sr.getHotelId(),
-                                sr.getHotelName(),
-                                null,
-                                new WSHotelCategoria(sr.getCategory(), null),
-                                null,
-                                null,
-                                new WSEndereco(sr.getLocalization().getAddress(), null, sr.getLocalization().getDestination(), null, sr.getLocalization().getCountryISO2(), "", sr.getLocalization().getCoordinates().get(0).toString(), sr.getLocalization().getCoordinates().get(1).toString()),
-                                null),
-                        quartoList,
-                        sqPesquisa,
-                        searchByHotelRS.getSearchResponse().getSearchToken()));
-
             }
+        } catch (Exception ex) {
+            throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, "disponibilidade", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao consultar os hóteis disponiveis", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         /**

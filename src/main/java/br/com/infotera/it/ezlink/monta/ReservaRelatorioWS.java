@@ -13,6 +13,7 @@ import br.com.infotera.common.WSReservaNome;
 import br.com.infotera.common.WSReservaRelatorioRQ;
 import br.com.infotera.common.WSReservaRelatorioRS;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
+import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.enumerator.WSReservaStatusEnum;
 import br.com.infotera.common.hotel.WSHotel;
 import br.com.infotera.common.util.Utils;
@@ -33,53 +34,58 @@ public class ReservaRelatorioWS {
     ChamaWS chamaWS = new ChamaWS();
 
     public WSReservaRelatorioRS relatorio(WSReservaRelatorioRQ reservaRelatorioRQ) throws ErrorException {
-                
+
         String dtCheckin = Utils.formatData(reservaRelatorioRQ.getDtInicial(), "yyyy-MM-dd'T'HH:mm:ss");
         String dtCheckout = Utils.formatData(reservaRelatorioRQ.getDtFinal(), "yyyy-MM-dd'T'HH:mm:ss");
-        
+
         ListRQ listRQ = new ListRQ(dtCheckin, dtCheckout);
 
         ListRS listRS = chamaWS.chamadaPadrao(reservaRelatorioRQ.getIntegrador(), listRQ, ListRS.class);
 
         List<WSReserva> reservaList = new ArrayList();
-        
-        for (BookingListResults blr : listRS.getBookingListResponse().getBookingListResults()) {
 
-            Date dtReserva = Utils.toDate(blr.getCreatedAt(), "yyyy-MM-dd'T'HH:mm:ss");
+        try {
 
-            List<WSReservaNome> nmReservaList = new ArrayList();
-            List<String> nmst = new ArrayList();
+            for (BookingListResults blr : listRS.getBookingListResponse().getBookingListResults()) {
 
-            nmReservaList.add(new WSReservaNome(blr.getPax().getFirstName(), blr.getPax().getLastName(), null, null, null));
+                Date dtReserva = Utils.toDate(blr.getCreatedAt(), "yyyy-MM-dd'T'HH:mm:ss");
 
-            List<WSReservaHotelUh> reservaHotelUhList = new ArrayList();
+                List<WSReservaNome> nmReservaList = new ArrayList();
+                List<String> nmst = new ArrayList();
 
-            reservaHotelUhList.add(new WSReservaHotelUh(null, nmReservaList));
+                nmReservaList.add(new WSReservaNome(blr.getPax().getFirstName(), blr.getPax().getLastName(), null, null, null));
 
-            WSReservaStatusEnum reservaStatusEnum = null;
+                List<WSReservaHotelUh> reservaHotelUhList = new ArrayList();
 
-            if (blr.getStatus().equals("Confirmed")) {
-                reservaStatusEnum = WSReservaStatusEnum.CONFIRMADO;
-            } else if (blr.getStatus().equals("Rejected")) {
-                reservaStatusEnum = WSReservaStatusEnum.NEGADO;
-            } else if (blr.getStatus().equals("Cancelled")) {
-                reservaStatusEnum = WSReservaStatusEnum.CANCELADO;
+                reservaHotelUhList.add(new WSReservaHotelUh(null, nmReservaList));
+
+                WSReservaStatusEnum reservaStatusEnum = null;
+
+                if (blr.getStatus().equals("Confirmed")) {
+                    reservaStatusEnum = WSReservaStatusEnum.CONFIRMADO;
+                } else if (blr.getStatus().equals("Rejected")) {
+                    reservaStatusEnum = WSReservaStatusEnum.NEGADO;
+                } else if (blr.getStatus().equals("Cancelled")) {
+                    reservaStatusEnum = WSReservaStatusEnum.CANCELADO;
+                }
+
+                WSReservaHotel reservaHotel = new WSReservaHotel(dtReserva,
+                        null,
+                        blr.getBookingId().toString(),
+                        new WSHotel(null, blr.getHotelName(), null, null),
+                        reservaHotelUhList,
+                        null,
+                        null,
+                        reservaStatusEnum,
+                        null,
+                        null);
+
+                WSReserva reserva = new WSReserva(reservaHotel);
+
+                reservaList.add(reserva);
             }
-
-            WSReservaHotel reservaHotel = new WSReservaHotel(dtReserva,
-                    null,
-                    blr.getBookingId().toString(),
-                    new WSHotel(null, blr.getHotelName(), null, null),
-                    reservaHotelUhList,
-                    null,
-                    null,
-                    reservaStatusEnum,
-                    null,
-                    null);
-
-            WSReserva reserva = new WSReserva(reservaHotel);
-
-            reservaList.add(reserva);
+        } catch (Exception ex) {
+            throw new ErrorException(reservaRelatorioRQ.getIntegrador(), ReservaRelatorioWS.class, "relatorio", WSMensagemErroEnum.HRL, "Ocorreu uma falha ao gerar relatório", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         return new WSReservaRelatorioRS(reservaList, reservaRelatorioRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);

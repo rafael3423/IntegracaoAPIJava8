@@ -20,7 +20,7 @@ import br.com.infotera.it.ezlink.rqrs.DetailsRS;
  * @author rafael
  */
 public class ConsultaReservaWS {
-    
+
     UtilsWS utilsWS = new UtilsWS();
     ChamaWS chamaWS = new ChamaWS();
 
@@ -33,9 +33,5 @@ public class ConsultaReservaWS {
         WSReserva reserva = utilsWS.montaReserva(consultaReservaRQ.getIntegrador(), detailsRS.getBooking(), isCancelamento);
 
         return new WSReservaRS(reserva, consultaReservaRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);
-
     }
-
-
-
 }
