@@ -115,10 +115,19 @@ public class EzlinkWS implements HotelImpl {
 
     @Override
     public WSReservaRS preCancelar(WSReservaRQ preCancelaReservaRQ) throws ErrorException {
-               try {
+        try {
             return montaWS.preCancelar(preCancelaReservaRQ);
         } catch (ErrorException ex) {
             return new WSReservaRS(null, ex.getIntegrador());
+        }
+    }
+
+    @Override
+    public WSTarifarHotelRS tarifar(WSTarifarHotelRQ tarifarHotelRQ) throws ErrorException {
+                try {
+            return montaWS.tarifar(tarifarHotelRQ);
+        } catch (ErrorException ex) {
+            return new WSTarifarHotelRS(null, ex.getIntegrador());
         }
     }
 
@@ -129,11 +138,6 @@ public class EzlinkWS implements HotelImpl {
 
     @Override
     public WSDestinoRS listaDestino(WSDestinoRQ wsdrq) throws ErrorException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public WSTarifarHotelRS tarifar(WSTarifarHotelRQ wsthrq) throws ErrorException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

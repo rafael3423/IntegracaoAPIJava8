@@ -1,0 +1,119 @@
+{
+    "booking": {
+        "id": 1353,
+        "hotels": [{
+                "id": "5c07df3e0b17ed294b3f1b6f",
+                "name": "Hostal Maria Luisa",
+                "category": 2,
+                "localization": {
+                    "address": "Calle de Hortaleza 19, 2nd floor",
+                    "coordinates": [-3.70019, 40.42157],
+                    "destinationId": "5d652a0e37f0a05da7a94a8e",
+                    "destination": "Madrid,  Spain",
+                    "countryISO2": "ES"
+                },
+                "rooms": [{
+                        "id": 1745,
+                        "checkIn": "2020-03-30",
+                        "checkOut": "2020-03-31",
+                        "status": "Cancelled",
+                        "name": "Double Or Twin Standard",
+                        "board": "No Board",
+                        "price": {
+                            "currency": "BRL",
+                            "value": 400.61
+                        },
+                        "pax": [{
+                                "firstName": "FLORIPES",
+                                "lastName": "FRIAS",
+                                "age": 39,
+                                "type": "ADT"
+                            }, {
+                                "firstName": "HUGO",
+                                "lastName": "NOGUEIRA",
+                                "age": 0,
+                                "type": "CHD"
+                            }],
+                        "cancellationPolicies": {
+                            "refundable": true,
+                            "penalties": [{
+                                    "from": "2020-03-23T22:59:00.000Z",
+                                    "price": {
+                                        "currency": "BRL",
+                                        "value": 400.61
+                                    }
+                                }]
+                        },
+                        "remarks": "**** THIS IS A TEST BOOKING ****"
+                    }, {
+                        "id": 1746,
+                        "checkIn": "2020-03-30",
+                        "checkOut": "2020-03-31",
+                        "status": "Cancelled",
+                        "name": "Double Or Twin Standard",
+                        "board": "No Board",
+                        "price": {
+                            "currency": "BRL",
+                            "value": 400.61
+                        },
+                        "pax": [{
+                                "firstName": "JAQUELINE",
+                                "lastName": "BATISTA",
+                                "age": 39,
+                                "type": "ADT"
+                            }, {
+                                "firstName": "LISETE",
+                                "lastName": "ALENCAR",
+                                "age": 0,
+                                "type": "CHD"
+                            }],
+                        "cancellationPolicies": {
+                            "refundable": true,
+                            "penalties": [{
+                                    "from": "2020-03-23T22:59:00.000Z",
+                                    "price": {
+                                        "currency": "BRL",
+                                        "value": 400.61
+                                    }
+                                }]
+                        },
+                        "remarks": "**** THIS IS A TEST BOOKING ****"
+                    }, {
+                        "id": 1747,
+                        "checkIn": "2020-03-30",
+                        "checkOut": "2020-03-31",
+                        "status": "Cancelled",
+                        "name": "Double Or Twin Standard",
+                        "board": "No Board",
+                        "price": {
+                            "currency": "BRL",
+                            "value": 400.61
+                        },
+                        "pax": [{
+                                "firstName": "ABRAIM",
+                                "lastName": "MARQUES",
+                                "age": 39,
+                                "type": "ADT"
+                            }, {
+                                "firstName": "LÍVIA",
+                                "lastName": "FERNANDES",
+                                "age": 0,
+                                "type": "CHD"
+                            }],
+                        "cancellationPolicies": {
+                            "refundable": true,
+                            "penalties": [{
+                                    "from": "2020-03-23T22:59:00.000Z",
+                                    "price": {
+                                        "currency": "BRL",
+                                        "value": 400.61
+                                    }
+                                }]
+                        },
+                        "remarks": "**** THIS IS A TEST BOOKING ****"
+                    }]
+            }],
+        "customerBookingId": null,
+        "createdAt": "2020-03-05T17:32:27.284Z"
+    }
+}

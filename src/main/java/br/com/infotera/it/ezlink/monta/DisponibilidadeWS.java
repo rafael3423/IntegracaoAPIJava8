@@ -51,7 +51,7 @@ public class DisponibilidadeWS {
      * este metodo faz a disponibilidade
      */
     public WSDisponibilidadeHotelRS disponibilidade(WSDisponibilidadeHotelRQ disponibilidadeRQ) throws ErrorException {
-        
+
         String metodo = "disponibilidade";
         List<String> hotelIdsList = new ArrayList();
         List<Room> roomList = new ArrayList();
@@ -164,7 +164,7 @@ public class DisponibilidadeWS {
                                     List<WSPolitica> politicaCancelamentoList = new ArrayList();
 
                                     if (r.getCancellationPolicies() != null) {
-                                        politicaCancelamentoList = utils.politicaCancelamento(r.getCancellationPolicies().getPenalties(),
+                                        politicaCancelamentoList = utils.montaPoliticaCancelamento(r.getCancellationPolicies().getPenalties(),
                                                 r.getRefundable(),
                                                 r.getRemarks());
                                     }
@@ -176,8 +176,9 @@ public class DisponibilidadeWS {
                                     WSTarifa tarifa = new WSTarifa(r.getPrice().getCurrency(),
                                             r.getPrice().getValue(),
                                             null,
-                                            null);
-                                    tarifa.setPoliticaList(politicaCancelamentoList);
+                                            null,
+                                            null,
+                                            politicaCancelamentoList);
 
                                     /**
                                      * Seta QuartoUhList com WSQuartoUh
@@ -187,7 +188,7 @@ public class DisponibilidadeWS {
                                                     r.getRoomId(),
                                                     r.getRoomName(),
                                                     r.getRoomName(),
-                                                    r.getRoomId()),
+                                                    r.getRoomId() + "#" + r.getRefundable()),
                                             new WSRegime(r.getBoard().getBoardCode().toString(),
                                                     r.getBoard().getBoardCode().toString(),
                                                     r.getBoard().getBoardName()),

@@ -269,7 +269,7 @@ public class ChamaWS {
         } finally {
             //if (metodo.equals("sessionCreateRQ")) {
             //} else {
-            System.out.println("REQUEST -->" + request.toString());
+            System.out.println("REQUEST-->" + request.toString());
             System.out.println("RESPONSE -->" + response.toString());
             integrador.setIntegradorLogList(Utils.adicionaIntegradorLog(integrador,
                     WSIntegradorLogTipoEnum.JSON,

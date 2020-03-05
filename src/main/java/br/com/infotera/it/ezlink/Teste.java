@@ -65,13 +65,13 @@ public class Teste {
                 dsCredencialList);
 
 //        //DISPONIBILIDADE
-        Date dtreservaFrom = Utils.toDate("28-02-2020", "dd-MM-yyyy");
-        Date dtReservaTo = Utils.toDate("29-02-2020", "dd-MM-yyyy");
+        Date dtreservaFrom = Utils.toDate("28-04-2020", "dd-MM-yyyy");
+        Date dtReservaTo = Utils.toDate("29-04-2020", "dd-MM-yyyy");
 
         List<WSConfigUh> configUh = new ArrayList();
         List<WSReservaNome> reservaNomeList = new ArrayList();
         reservaNomeList.add(new WSReservaNome("jose", "silva", WSPaxTipoEnum.ADT, null, 30, null));
-        reservaNomeList.add(new WSReservaNome("jose", "silva", WSPaxTipoEnum.CHD, null, 11, null));
+        reservaNomeList.add(new WSReservaNome("jose", "silva", WSPaxTipoEnum.CHD, null, 0, null));
         configUh.add(new WSConfigUh(reservaNomeList));
 
         List<WSHotel> hotelIds = new ArrayList();

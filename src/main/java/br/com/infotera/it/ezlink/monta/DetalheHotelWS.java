@@ -35,8 +35,7 @@ public class DetalheHotelWS {
         HotelsRQ hotelsRQ = new HotelsRQ(detalheHotelRQ.getHotel().getIdExterno());
 
         HotelsRS hotelsRS = chamaWS.chamadaPadrao(detalheHotelRQ.getIntegrador(), hotelsRQ, HotelsRS.class);
-        System.out.println(hotelsRS);
-
+        
         WSEndereco endereco = new WSEndereco(hotelsRS.getHotelListResponse().getHotelListResults().getHotels().get(0).getLocalization().getAddress(),
                 "",
                 "",
@@ -59,7 +58,7 @@ public class DetalheHotelWS {
 
             }
         } catch (Exception ex) {
-            throw new ErrorException(detalheHotelRQ.getIntegrador(), DetalheHotelWS.class, "detalheHotel", WSMensagemErroEnum.HCO, "Ocorreu uma falha ao pesquisar o hotel", WSIntegracaoStatusEnum.NEGADO, ex);
+            throw new ErrorException(detalheHotelRQ.getIntegrador(), DetalheHotelWS.class, "detalheHotel", WSMensagemErroEnum.HPH, "Ocorreu uma falha ao pesquisar o hotel", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         List<WSFacilidade> facilidadeList = new ArrayList();
@@ -84,7 +83,7 @@ public class DetalheHotelWS {
                         null));
             }
         } catch (Exception ex) {
-            throw new ErrorException(detalheHotelRQ.getIntegrador(), DetalheHotelWS.class, "detalheHotel", WSMensagemErroEnum.HCO, "Ocorreu uma falha ao pesquisar o hotel", WSIntegracaoStatusEnum.NEGADO, ex);
+            throw new ErrorException(detalheHotelRQ.getIntegrador(), DetalheHotelWS.class, "detalheHotel", WSMensagemErroEnum.HPH, "Ocorreu uma falha ao pesquisar o hotel", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         WSHotel hotel = new WSHotel(hotelsRS.getHotelListResponse().getHotelListResults().getHotels().get(0).getName(),

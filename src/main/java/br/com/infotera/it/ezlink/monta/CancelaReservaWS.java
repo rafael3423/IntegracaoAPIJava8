@@ -39,14 +39,14 @@ public class CancelaReservaWS {
 
                 CancelRS cancelRS = chamaWS.chamadaPadrao(cancelaReservaRQ.getIntegrador(), cancelRQ, CancelRS.class);
 
-                WSReserva reserva = utilsWS.montaReserva(cancelaReservaRQ.getIntegrador(), cancelRS.getCancelledBooking(), true);
+                WSReserva reserva = consultaReservaWS.montaReserva(cancelaReservaRQ.getIntegrador(), cancelRS.getCancelledBooking(), true);
 
                 return new WSReservaRS(reserva, cancelaReservaRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);
             } else {
                 return consultaCancelamento;
             }
         } catch (Exception ex) {
-            throw new ErrorException(cancelaReservaRQ.getIntegrador(), CancelaReservaWS.class, "cancela", WSMensagemErroEnum.HCO, "Ocorreu uma falha ao efetuar o cancelamento da reserva", WSIntegracaoStatusEnum.NEGADO, ex);
+            throw new ErrorException(cancelaReservaRQ.getIntegrador(), CancelaReservaWS.class, "cancela", WSMensagemErroEnum.HCA, "Ocorreu uma falha ao efetuar o cancelamento da reserva", WSIntegracaoStatusEnum.NEGADO, ex);
         }
     }
 }

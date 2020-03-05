@@ -39,12 +39,15 @@ public class ReservarWS {
     public WSReservarRS reservar(WSReservarRQ reservarRQ) throws ErrorException {
 
         List<Room> roomList = new ArrayList();
-        List<Pax> paxList = new ArrayList();
 
         try {
 
             for (WSReservaHotelUh rhuh : reservarRQ.getReserva().getReservaHotel().getReservaHotelUhList()) {
+
+                List<Pax> paxList = new ArrayList();
+
                 for (WSReservaNome rn : rhuh.getReservaNomeList()) {
+
                     String paxTipo;
                     if (rn.getPaxTipo().equals(WSPaxTipoEnum.ADT)) {
                         paxTipo = "ADT";
@@ -53,16 +56,23 @@ public class ReservarWS {
                     }
 
                     paxList.add(new Pax(rn.getNmNome(), rn.getNmSobrenome(), rn.getQtIdade(), paxTipo));
+
                 }
-                roomList.add(new Room(rhuh.getUh().getDsParametro(), paxList));
+
+                String chvSplitRoomId[] = rhuh.getUh().getDsParametro().split("#");
+                String roomId = chvSplitRoomId[0];
+
+                roomList.add(new Room(roomId, paxList));
+
             }
+
         } catch (Exception ex) {
             throw new ErrorException(reservarRQ.getIntegrador(), ReservaRelatorioWS.class, "reserva", WSMensagemErroEnum.HRE, "Ocorreu uma falha ao efetuar a reserva do quarto ", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         BookRQ bookRQ = new BookRQ(
                 reservarRQ.getReserva().getReservaHotel().getDsParametro(),
-                reservarRQ.getReserva().getIdExterno(),
+                reservarRQ.getReserva().getId(),
                 roomList);
 
         BookRS bookRS = chamaWS.chamadaPadrao(reservarRQ.getIntegrador(), bookRQ, BookRS.class);
@@ -70,8 +80,7 @@ public class ReservarWS {
         WSReserva reserva = new WSReserva(new WSReservaHotel(bookRS.getBooking().getId().toString()));
 
         WSReservaRS reservaRS = consultaReservaWS.consulta(new WSReservaRQ(reservarRQ.getIntegrador(), reserva), false);
-
-        System.out.println(bookRS);
+        
         return new WSReservarRS(reservaRS.getReserva(), reservarRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);
 
     }
