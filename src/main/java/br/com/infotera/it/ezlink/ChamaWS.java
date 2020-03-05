@@ -276,8 +276,8 @@ public class ChamaWS {
             }
         } finally {
 
-            System.out.println("REQUEST--" + RQ + "-->" + request.toString()); // Printa o request que recebe do info e envia para o conector
-            System.out.println("RESPONSE --" + RS + "-->" + response.toString());// Printa o response que vem do conecotr e envia para o info
+//            System.out.println("REQUEST--" + RQ + "-->" + request.toString()); // Printa o request que recebe do info e envia para o conector
+//            System.out.println("RESPONSE --" + RS + "-->" + response.toString());// Printa o response que vem do conecotr e envia para o info
             
             integrador.setIntegradorLogList(Utils.adicionaIntegradorLog(integrador,
                     WSIntegradorLogTipoEnum.JSON,

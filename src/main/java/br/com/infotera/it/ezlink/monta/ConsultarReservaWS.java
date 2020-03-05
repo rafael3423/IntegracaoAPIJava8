@@ -198,9 +198,11 @@ public class ConsultarReservaWS {
                         } else if (r.getStatus().equals("Rejected")) {
                             reservaStatusEnum = WSReservaStatusEnum.NEGADO;
 
-                        } else {
+                        } else if (r.getStatus().equals("Cancelled")) {
                             reservaStatusEnum = WSReservaStatusEnum.CANCELADO;
                             qntCancelado++;
+                        } else {
+                            throw new ErrorException(integrador, UtilsWS.class, "montareserva", WSMensagemErroEnum.HCO, "Erro ao ler status da reserva, status atual: " + r.getStatus(), WSIntegracaoStatusEnum.INCONSISTENTE, null);
                         }
 
                         reservaHotelUh.add(new WSReservaHotelUh(sqQuarto,
