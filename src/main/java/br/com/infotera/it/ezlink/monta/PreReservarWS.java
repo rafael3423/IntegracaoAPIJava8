@@ -141,8 +141,7 @@ public class PreReservarWS {
         reservaHotel.setDsParametro(preReservarRQ.getReserva().getReservaHotel().getDsParametro());
 
         WSReserva reserva = new WSReserva(reservaHotel);
-        reserva.setIdExterno(reserva.getId());
-
+        
         return new WSPreReservarRS(reserva, preReservarRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);
     }
 }
