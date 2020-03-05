@@ -34,7 +34,7 @@ public class ReservarWS {
 
     UtilsWS utilsWS = new UtilsWS();
     ChamaWS chamaWS = new ChamaWS();
-    ConsultaReservaWS consultaReservaWS = new ConsultaReservaWS();
+    ConsultarReservaWS consultarReservaWS = new ConsultarReservaWS();
 
     public WSReservarRS reservar(WSReservarRQ reservarRQ) throws ErrorException {
 
@@ -79,7 +79,7 @@ public class ReservarWS {
 
         WSReserva reserva = new WSReserva(new WSReservaHotel(bookRS.getBooking().getId().toString()));
 
-        WSReservaRS reservaRS = consultaReservaWS.consulta(new WSReservaRQ(reservarRQ.getIntegrador(), reserva), false);
+        WSReservaRS reservaRS = consultarReservaWS.consultar(new WSReservaRQ(reservarRQ.getIntegrador(), reserva), false);
         
         return new WSReservarRS(reservaRS.getReserva(), reservarRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);
 

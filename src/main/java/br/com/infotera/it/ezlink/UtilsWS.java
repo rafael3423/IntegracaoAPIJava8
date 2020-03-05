@@ -20,38 +20,38 @@ import java.util.List;
  */
 public class UtilsWS {
 
-    
-
     public List<WSPolitica> montaPoliticaCancelamento(List<Penalt> penaltList, Boolean refundable, String remarks) {
 
         List<WSPolitica> politicaList = new ArrayList();
 
         if (penaltList != null) {
-            for (Penalt p : penaltList) {
 
-                Date dtMaximaCancelamento = Utils.addDias(Utils.toDate(p.getFrom(), "yyyy-MM-dd'T'HH:mm:ss"), -3);
+                for (Penalt p : penaltList) {
 
-                boolean stImediata = false; //Inicia Multa em normalmente falso
+                    Date dtMaximaCancelamento = Utils.addDias(Utils.toDate(p.getFrom(), "yyyy-MM-dd'T'HH:mm:ss"), -3);
 
-                if (new Date().compareTo(dtMaximaCancelamento) == 1) { //Compara se o dia de hoje passou a data máxima de ccanelmento
-                    stImediata = true;  // entra em multa
+                    boolean stImediata = false; //Inicia Multa em normalmente falso
+
+                    if (new Date().compareTo(dtMaximaCancelamento) == 1) { //Compara se o dia de hoje passou a data máxima de ccanelmento
+                        stImediata = true;  // entra em multa
+                    }
+
+                    if (refundable == false) { // checa se o conector tem prazo de cancelamento
+                        stImediata = true; // entra em multa
+                    }
+
+                    politicaList.add(new WSPoliticaCancelamento("Cancelamento",
+                            "",
+                            p.getPrice().getCurrency(),
+                            p.getPrice().getValue(),
+                            null,
+                            null,
+                            stImediata,
+                            dtMaximaCancelamento,
+                            null,
+                            !refundable));
                 }
 
-                if (refundable == false) { // checa se o conector tem prazo de cancelamento
-                    stImediata = true; // entra em multa
-                }
-
-                politicaList.add(new WSPoliticaCancelamento("Cancelamento",
-                        "",
-                        p.getPrice().getCurrency(),
-                        p.getPrice().getValue(),
-                        null,
-                        null,
-                        stImediata,
-                        dtMaximaCancelamento,
-                        null,
-                        !refundable));
-            }
 
             if (remarks != null) {
                 politicaList.add(new WSPoliticaVoucher("Remarks", remarks));

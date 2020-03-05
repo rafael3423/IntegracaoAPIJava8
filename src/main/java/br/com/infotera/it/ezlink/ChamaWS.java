@@ -50,18 +50,11 @@ public class ChamaWS {
         Response r;
         String metodo = null;
         String endpoint;
-        String tid;
         String request = "";
         String response = "";
-        String createdFrom;
-        String createdTo;
         String bookingId;
-        String skip;
-        String limit;
-        String order;
-        String destinationId;
-        String countryISO2;
-        String createdUpdated;
+        String RQ = null;
+        String RS = null;
 
         Gson gson = new Gson();//cria objeto gson exportado do pom.xml da google que converte json
         try {
@@ -73,9 +66,11 @@ public class ChamaWS {
             }
             Client client = ClientBuilder.newClient(); //conexão do server
 
-            //
             if (envio instanceof SearchByDestRQ) {//compara se o objeto envio tem a cara de AutorizarRq para entrar na respectiva ação de postar a autorização
                 metodo = "searchByDestinationId";
+                RQ = "Disponibilidade";
+                RS = "Disponibilidade";
+
                 try {
                     r = (Response) client.target(endpoint + "hotel/search")// 
                             .request()
@@ -89,7 +84,6 @@ public class ChamaWS {
                     response = ret;
                     objResponse = gson.fromJson(ret, SearchByDestRS.class);//atribui ao objresponse a conversão de json para objeto obtido no ret e diz que ele é do tipo AutorizarRs classe
 
-//                    objResponse = response.readEntity(TransactionResponse.class);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
@@ -99,6 +93,9 @@ public class ChamaWS {
 
             if (envio instanceof SearchByHotelRQ) {//compara se o objeto envio tem a cara de AutorizarRq para entrar na respectiva ação de postar a autorização
                 metodo = "searchByHotelIds";
+                RQ = "Disponibilidade";
+                RS = "Disponibilidade";
+
                 try {
                     r = (Response) client.target(endpoint + "hotel/search")// 
                             .request()
@@ -112,7 +109,6 @@ public class ChamaWS {
                     response = ret;
                     objResponse = gson.fromJson(ret, SearchByHotelRS.class);//atribui ao objresponse a conversão de json para objeto obtido no ret e diz que ele é do tipo AutorizarRs classe
 
-//                    objResponse = response.readEntity(TransactionResponse.class);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
@@ -122,6 +118,9 @@ public class ChamaWS {
 
             if (envio instanceof QuoteRQ) {//compara se o objeto envio tem a cara de AutorizarRq para entrar na respectiva ação de postar a autorização
                 metodo = "quote";
+                RQ = "Pre Reserva";
+                RS = "Pre Reserva";
+
                 try {
                     r = (Response) client.target(endpoint + "hotel/quote")// 
                             .request()
@@ -135,7 +134,6 @@ public class ChamaWS {
                     response = ret;
                     objResponse = gson.fromJson(ret, QuoteRS.class);//atribui ao objresponse a conversão de json para objeto obtido no ret e diz que ele é do tipo AutorizarRs classe
 
-//                    objResponse = response.readEntity(TransactionResponse.class);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
@@ -145,6 +143,9 @@ public class ChamaWS {
 
             if (envio instanceof BookRQ) {//compara se o objeto envio tem a cara de AutorizarRq para entrar na respectiva ação de postar a autorização
                 metodo = "book";
+                RQ = "Reservar";
+                RS = "Reservar";
+
                 try {
                     r = (Response) client.target(endpoint + "hotel/book")// 
                             .request()
@@ -158,7 +159,6 @@ public class ChamaWS {
                     response = ret;
                     objResponse = gson.fromJson(ret, BookRS.class);//atribui ao objresponse a conversão de json para objeto obtido no ret e diz que ele é do tipo AutorizarRs classe
 
-//                    objResponse = response.readEntity(TransactionResponse.class);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
@@ -168,6 +168,9 @@ public class ChamaWS {
 
             if (envio instanceof ListRQ) {//compara se o objeto envio tem a cara de AutorizarRq para entrar na respectiva ação de postar a autorização
                 metodo = "list";
+                RQ = "Lista";
+                RS = "Lista";
+
                 try {
                     ListRQ listRQ = (ListRQ) envio;
 
@@ -183,7 +186,6 @@ public class ChamaWS {
                     response = ret;
                     objResponse = gson.fromJson(ret, ListRS.class);//atribui ao objresponse a conversão de json para objeto obtido no ret e diz que ele é do tipo AutorizarRs classe
 
-//                    objResponse = response.readEntity(TransactionResponse.class);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
@@ -193,6 +195,9 @@ public class ChamaWS {
 
             if (envio instanceof DetailsRQ) {//compara se o objeto envio tem a cara de AutorizarRq para entrar na respectiva ação de postar a autorização
                 metodo = "details";
+                RQ = "Consulta";
+                RS = "Consulta";
+
                 try {
                     DetailsRQ detailsRQ = (DetailsRQ) envio;
                     bookingId = Integer.toString(detailsRQ.getBookingId());
@@ -210,7 +215,6 @@ public class ChamaWS {
                     response = ret;
                     objResponse = gson.fromJson(ret, DetailsRS.class);//atribui ao objresponse a conversão de json para objeto obtido no ret e diz que ele é do tipo AutorizarRs classe
 
-//                    objResponse = response.readEntity(TransactionResponse.class);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
@@ -220,6 +224,9 @@ public class ChamaWS {
 
             if (envio instanceof CancelRQ) {//compara se o objeto envio tem a cara de AutorizarRq para entrar na respectiva ação de postar a autorização
                 metodo = "cancel";
+                RQ = "Cancelar";
+                RS = "Cancelar";
+
                 try {
 
                     r = (Response) client.target(endpoint + "hotel/cancel")
@@ -234,7 +241,6 @@ public class ChamaWS {
                     response = ret;
                     objResponse = gson.fromJson(ret, CancelRS.class);//atribui ao objresponse a conversão de json para objeto obtido no ret e diz que ele é do tipo AutorizarRs classe
 
-//                    objResponse = response.readEntity(TransactionResponse.class);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
@@ -244,6 +250,9 @@ public class ChamaWS {
 
             if (envio instanceof HotelsRQ) {//compara se o objeto envio tem a cara de AutorizarRq para entrar na respectiva ação de postar a autorização
                 metodo = "hotels";
+                RQ = "Detalhe Hotel";
+                RS = "Detalhe Hotel";
+
                 try {
                     HotelsRQ hotelsRQ = (HotelsRQ) envio;
 
@@ -259,7 +268,6 @@ public class ChamaWS {
                     response = ret;
                     objResponse = gson.fromJson(ret, HotelsRS.class);//atribui ao objresponse a conversão de json para objeto obtido no ret e diz que ele é do tipo AutorizarRs classe
 
-//                    objResponse = response.readEntity(TransactionResponse.class);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
@@ -267,10 +275,10 @@ public class ChamaWS {
 
             }
         } finally {
-            //if (metodo.equals("sessionCreateRQ")) {
-            //} else {
-            System.out.println("REQUEST-->" + request.toString());
-            System.out.println("RESPONSE -->" + response.toString());
+
+            System.out.println("REQUEST--" + RQ + "-->" + request.toString()); // Printa o request que recebe do info e envia para o conector
+            System.out.println("RESPONSE --" + RS + "-->" + response.toString());// Printa o response que vem do conecotr e envia para o info
+            
             integrador.setIntegradorLogList(Utils.adicionaIntegradorLog(integrador,
                     WSIntegradorLogTipoEnum.JSON,
                     metodo,

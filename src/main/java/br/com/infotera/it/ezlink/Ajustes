@@ -1,9 +1,6 @@
-Remover variaveis e codigos não utilizados, ex: String tid no ChamaWS
-Remover códigos comentados não utilizados
-Remover ex.printStackTrace() de todo o código
+
+
 Comentar todos os System.out.println do código
-Remover imports não utilizados
-Ajustar identação do codigo em todas as classes
-Remover metodos não utilizados no MontaWS
-Colocar os nomes das classes e metodos em verbos, Consultar, Cancelar...
-Colocar try catch em blocos for
+
+
+

@@ -16,10 +16,10 @@ import br.com.infotera.it.ezlink.rqrs.HotelsRS;
  *
  * @author rafael
  */
-public class PesquisaHotelWS {
+public class PesquisarHotelWS {
         ChamaWS chamaWS = new ChamaWS();
 
-    public WSPesquisaHotelRS pesquisaHotel(WSPesquisaHotelRQ pesquisaHotelRQ) throws ErrorException {
+    public WSPesquisaHotelRS pesquisarHotel(WSPesquisaHotelRQ pesquisaHotelRQ) throws ErrorException {
 
         HotelsRQ hotelsRQ = new HotelsRQ(
                 600,

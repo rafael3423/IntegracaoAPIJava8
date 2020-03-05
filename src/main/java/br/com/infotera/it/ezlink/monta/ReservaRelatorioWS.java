@@ -51,7 +51,6 @@ public class ReservaRelatorioWS {
                 Date dtReserva = Utils.toDate(blr.getCreatedAt(), "yyyy-MM-dd'T'HH:mm:ss");
 
                 List<WSReservaNome> nmReservaList = new ArrayList();
-                List<String> nmst = new ArrayList();
 
                 nmReservaList.add(new WSReservaNome(blr.getPax().getFirstName(), blr.getPax().getLastName(), null, null, null));
 

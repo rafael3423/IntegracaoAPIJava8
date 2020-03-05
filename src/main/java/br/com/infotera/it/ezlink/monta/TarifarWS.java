@@ -99,6 +99,7 @@ public class TarifarWS {
 
         //montar um MAP para armazenar todo o resultado da busca
         Map<String, WSQuartoUh> mapQuartoUH = new HashMap();
+        
         try {
             for (WSHotelPesquisa hp : disponibilidadeHotelRS.getHotelPesquisaList()) {
                 int flag = 1;

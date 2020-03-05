@@ -6,17 +6,10 @@
 package br.com.infotera.it.ezlink;
 
 import br.com.infotera.common.ErrorException;
-import br.com.infotera.common.WSIntegrador;
-import br.com.infotera.common.WSPreAlterarRQ;
-import br.com.infotera.common.WSPreAlterarRS;
 import br.com.infotera.common.WSPreReservarRQ;
 import br.com.infotera.common.WSPreReservarRS;
 import br.com.infotera.common.WSReservaRelatorioRQ;
 import br.com.infotera.common.WSReservaRelatorioRS;
-import br.com.infotera.common.destino.rqrs.WSDestinoRQ;
-import br.com.infotera.common.destino.rqrs.WSDestinoRS;
-import br.com.infotera.common.hotel.WSAlteraReservaRQ;
-import br.com.infotera.common.hotel.WSAlteraReservaRS;
 import br.com.infotera.common.hotel.rqrs.WSDetalheHotelRQ;
 import br.com.infotera.common.hotel.rqrs.WSDetalheHotelRS;
 import br.com.infotera.common.hotel.rqrs.WSDisponibilidadeHotelRQ;
@@ -29,12 +22,12 @@ import br.com.infotera.common.reserva.rqrs.WSReservaRQ;
 import br.com.infotera.common.reserva.rqrs.WSReservaRS;
 import br.com.infotera.common.reserva.rqrs.WSReservarRQ;
 import br.com.infotera.common.reserva.rqrs.WSReservarRS;
-import br.com.infotera.it.ezlink.monta.CancelaReservaWS;
-import br.com.infotera.it.ezlink.monta.ConsultaReservaWS;
-import br.com.infotera.it.ezlink.monta.DetalheHotelWS;
+import br.com.infotera.it.ezlink.monta.CancelarReservaWS;
+import br.com.infotera.it.ezlink.monta.ConsultarReservaWS;
+import br.com.infotera.it.ezlink.monta.DetalharHotelWS;
 import br.com.infotera.it.ezlink.monta.DisponibilidadeWS;
-import br.com.infotera.it.ezlink.monta.PesquisaHotelWS;
-import br.com.infotera.it.ezlink.monta.PreCancelaReservaWS;
+import br.com.infotera.it.ezlink.monta.PesquisarHotelWS;
+import br.com.infotera.it.ezlink.monta.PreCancelarReservaWS;
 import br.com.infotera.it.ezlink.monta.PreReservarWS;
 import br.com.infotera.it.ezlink.monta.ReservaRelatorioWS;
 import br.com.infotera.it.ezlink.monta.ReservarWS;
@@ -66,58 +59,34 @@ public class MontaWS {
         return reservaRelatorioWS.relatorio(reservaRelatorioRQ);
     }
 
-    public WSReservaRS consulta(WSReservaRQ consultaReservaRQ) throws ErrorException {
-        ConsultaReservaWS consultaReservaWS = new ConsultaReservaWS();
-        return consultaReservaWS.consulta(consultaReservaRQ, false);
+    public WSReservaRS consultar(WSReservaRQ consultaReservaRQ) throws ErrorException {
+        ConsultarReservaWS consultarReservaWS = new ConsultarReservaWS();
+        return consultarReservaWS.consultar(consultaReservaRQ, false);
     }
 
     public WSReservaRS cancelar(WSReservaRQ cancelaReservaRQ) throws ErrorException {
-        CancelaReservaWS cancelaReservaWS = new CancelaReservaWS();
-        return cancelaReservaWS.cancela(cancelaReservaRQ);
+        CancelarReservaWS cancelarReservaWS = new CancelarReservaWS();
+        return cancelarReservaWS.cancelar(cancelaReservaRQ);
     }
 
-    public WSPesquisaHotelRS pesquisaHotel(WSPesquisaHotelRQ pesquisaHotelRQ) throws ErrorException {
-        PesquisaHotelWS pesquisaHotelWS = new PesquisaHotelWS();
-        return pesquisaHotelWS.pesquisaHotel(pesquisaHotelRQ);
+    public WSPesquisaHotelRS pesquisarHotel(WSPesquisaHotelRQ pesquisaHotelRQ) throws ErrorException {
+        PesquisarHotelWS pesquisarHotelWS = new PesquisarHotelWS();
+        return pesquisarHotelWS.pesquisarHotel(pesquisaHotelRQ);
     }
 
-    public WSDetalheHotelRS detalheHotel(WSDetalheHotelRQ detalheHotelRQ) throws ErrorException {
-        DetalheHotelWS detalheHotelWS = new DetalheHotelWS();
-        return detalheHotelWS.detalheHotel(detalheHotelRQ);
+    public WSDetalheHotelRS detalharHotel(WSDetalheHotelRQ detalheHotelRQ) throws ErrorException {
+        DetalharHotelWS detalharHotelWS = new DetalharHotelWS();
+        return detalharHotelWS.detalharHotel(detalheHotelRQ);
     }
 
-    public WSReservaRS preCancelar(WSReservaRQ preCancelaReservaRQ) throws ErrorException {
-        PreCancelaReservaWS preCancelaReservaWS = new PreCancelaReservaWS();
-        return preCancelaReservaWS.preCancelaReserva(preCancelaReservaRQ);
+    public WSReservaRS preCancelar(WSReservaRQ preCancelarReservaRQ) throws ErrorException {
+        PreCancelarReservaWS preCancelarReservaWS = new PreCancelarReservaWS();
+        return preCancelarReservaWS.preCancelarReserva(preCancelarReservaRQ);
     }
 
     public WSTarifarHotelRS tarifar(WSTarifarHotelRQ tarifarHotelRQ) throws ErrorException {
         TarifarWS tarifarWS = new TarifarWS();
         return tarifarWS.tarifarHotel(tarifarHotelRQ);
-    }
-
-    public WSIntegrador login(WSIntegrador wsi) throws ErrorException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public WSDestinoRS listaDestino(WSDestinoRQ wsdrq) throws ErrorException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public WSReservaRS confirmar(WSReservaRQ wsrrq) throws ErrorException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public WSPreAlterarRS preAlterarReserva(WSPreAlterarRQ wsparq) throws ErrorException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public WSAlteraReservaRS alterarReserva(WSAlteraReservaRQ wsarrq) throws ErrorException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void alterarPrazo(WSAlteraReservaRQ wsarrq) throws ErrorException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

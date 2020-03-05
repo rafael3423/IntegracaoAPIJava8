@@ -13,11 +13,11 @@ import br.com.infotera.common.reserva.rqrs.WSReservaRS;
  *
  * @author rafael
  */
-public class PreCancelaReservaWS {
+public class PreCancelarReservaWS {
 
-    public WSReservaRS preCancelaReserva(WSReservaRQ preCancelaReservaRQ) throws ErrorException {
-        ConsultaReservaWS consultaReservaWS = new ConsultaReservaWS();
-        return consultaReservaWS.consulta(preCancelaReservaRQ, true);
+    public WSReservaRS preCancelarReserva(WSReservaRQ preCancelarReservaRQ) throws ErrorException {
+        ConsultarReservaWS consultarReservaWS = new ConsultarReservaWS();
+        return consultarReservaWS.consultar(preCancelarReservaRQ, true);
     }
 
 }

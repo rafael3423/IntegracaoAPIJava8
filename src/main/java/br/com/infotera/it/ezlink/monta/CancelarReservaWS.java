@@ -21,32 +21,32 @@ import br.com.infotera.it.ezlink.rqrs.CancelRS;
  *
  * @author rafael
  */
-public class CancelaReservaWS {
+public class CancelarReservaWS {
 
-    ConsultaReservaWS consultaReservaWS = new ConsultaReservaWS();
+    ConsultarReservaWS consultarReservaWS = new ConsultarReservaWS();
     UtilsWS utilsWS = new UtilsWS();
     ChamaWS chamaWS = new ChamaWS();
 
-    public WSReservaRS cancela(WSReservaRQ cancelaReservaRQ) throws ErrorException {
+    public WSReservaRS cancelar(WSReservaRQ cancelaReservaRQ) throws ErrorException {
         try {
 
-            WSReservaRS consultaCancelamento = consultaReservaWS.consulta(cancelaReservaRQ, true);
+            WSReservaRS consultarCancelamento = consultarReservaWS.consultar(cancelaReservaRQ, true);
 
-            if (consultaCancelamento.getReserva().getReservaHotel().getReservaStatus().equals(WSReservaStatusEnum.CONFIRMADO)) {
+            if (consultarCancelamento.getReserva().getReservaHotel().getReservaStatus().equals(WSReservaStatusEnum.CONFIRMADO)) {
                 CancelRQ cancelRQ = new CancelRQ(Integer.parseInt(cancelaReservaRQ.getReserva().getReservaHotel().getNrLocalizador()),
                         null,
                         true);
 
                 CancelRS cancelRS = chamaWS.chamadaPadrao(cancelaReservaRQ.getIntegrador(), cancelRQ, CancelRS.class);
 
-                WSReserva reserva = consultaReservaWS.montaReserva(cancelaReservaRQ.getIntegrador(), cancelRS.getCancelledBooking(), true);
+                WSReserva reserva = consultarReservaWS.montarReserva(cancelaReservaRQ.getIntegrador(), cancelRS.getCancelledBooking(), true);
 
                 return new WSReservaRS(reserva, cancelaReservaRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);
             } else {
-                return consultaCancelamento;
+                return consultarCancelamento;
             }
         } catch (Exception ex) {
-            throw new ErrorException(cancelaReservaRQ.getIntegrador(), CancelaReservaWS.class, "cancela", WSMensagemErroEnum.HCA, "Ocorreu uma falha ao efetuar o cancelamento da reserva", WSIntegracaoStatusEnum.NEGADO, ex);
+            throw new ErrorException(cancelaReservaRQ.getIntegrador(), CancelarReservaWS.class, "cancelar", WSMensagemErroEnum.HCA, "Ocorreu uma falha ao efetuar o cancelamento da reserva", WSIntegracaoStatusEnum.NEGADO, ex);
         }
     }
 }

@@ -1,20 +1,52 @@
 {
-    "searchToken": "300081c0-5f0b-11ea-bed8-bd44fb666a57",
-    "rooms": [{
-            "roomId": "327181c0-5f0b-11ea-bed8-bd44fb666a57",
-            "pax": [{
-                    "firstName": "IVANOEL",
-                    "lastName": "MENEZZES",
-                    "age": 40,
-                    "type": "ADT"
-                }]
-        }, {
-            "roomId": "32b0fbc0-5f0b-11ea-bed8-bd44fb666a57",
-            "pax": [{
-                    "firstName": "EDUARDO",
-                    "lastName": "MENEZZES",
-                    "age": 40,
-                    "type": "ADT"
-                }]
-        }]
+    "booking": {
+        "id": 1405,
+        "hotels": [{
+                "_id": "5c07df3e0b17ed294b3f1b6f",
+                "name": "Hostal Maria Luisa",
+                "phone": ["34-915-211630", "34-915-211682"],
+                "category": 2,
+                "localization": {
+                    "address": "Calle de Hortaleza 19, 2nd floor",
+                    "coordinates": [-3.70019, 40.42157],
+                    "destinationId": "5d652a0e37f0a05da7a94a8e",
+                    "destination": "Madrid,  Spain",
+                    "countryISO2": "ES"
+                },
+                "rooms": [{
+                        "id": 1845,
+                        "checkIn": "2020-03-16",
+                        "checkOut": "2020-03-19",
+                        "status": "Rejected",
+                        "name": "Double Or Twin Room (3 Twin Beds)",
+                        "board": "No Board",
+                        "price": {
+                            "currency": "BRL",
+                            "value": 1037.23
+                        },
+                        "pax": [{
+                                "firstName": "BRANDÃO",
+                                "lastName": "DIAS",
+                                "age": 39,
+                                "type": "ADT"
+                            }, {
+                                "firstName": "ZÉLIO",
+                                "lastName": "RODRIGUES",
+                                "age": 39,
+                                "type": "ADT"
+                            }],
+                        "cancellationPolicies": {
+                            "refundable": false,
+                            "penalties": [{
+                                    "from": "2020-03-03T03:00:00.000Z",
+                                    "price": {
+                                        "currency": "BRL",
+                                        "value": 1027.23
+                                    }
+                                }]
+                        },
+                        "remarks": "**** THIS IS A TEST BOOKING ****"
+                    }]
+            }]
+    }
 }

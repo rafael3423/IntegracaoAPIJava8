@@ -44,23 +44,23 @@ import java.util.List;
  *
  * @author rafael
  */
-public class ConsultaReservaWS {
+public class ConsultarReservaWS {
 
     UtilsWS utilsWS = new UtilsWS();
     ChamaWS chamaWS = new ChamaWS();
 
-    public WSReservaRS consulta(WSReservaRQ consultaReservaRQ, Boolean isCancelamento) throws ErrorException {
+    public WSReservaRS consultar(WSReservaRQ consultaReservaRQ, Boolean isCancelamento) throws ErrorException {
 
         DetailsRQ detailsRQ = new DetailsRQ(Integer.parseInt(consultaReservaRQ.getReserva().getReservaHotel().getNrLocalizador()));
 
         DetailsRS detailsRS = chamaWS.chamadaPadrao(consultaReservaRQ.getIntegrador(), detailsRQ, DetailsRS.class);
 
-        WSReserva reserva = montaReserva(consultaReservaRQ.getIntegrador(), detailsRS.getBooking(), isCancelamento);
+        WSReserva reserva = montarReserva(consultaReservaRQ.getIntegrador(), detailsRS.getBooking(), isCancelamento);
 
         return new WSReservaRS(reserva, consultaReservaRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);
     }
 
-    public WSReserva montaReserva(WSIntegrador integrador, Booking booking, Boolean isCancelamento) throws ErrorException {
+    public WSReserva montarReserva(WSIntegrador integrador, Booking booking, Boolean isCancelamento) throws ErrorException {
 
         WSHotel hotel = new WSHotel();
 
@@ -161,6 +161,7 @@ public class ConsultaReservaWS {
                         WSRegime regime = new WSRegime(r.getBoard(), r.getBoard(), r.getBoard());
 
                         List<WSReservaNome> reservaNomeList = new ArrayList();
+
                         try {
 
                             for (Pax pa : r.getPax()) {

@@ -11,7 +11,6 @@ import br.com.infotera.common.WSPreAlterarRQ;
 import br.com.infotera.common.WSPreAlterarRS;
 import br.com.infotera.common.WSPreReservarRQ;
 import br.com.infotera.common.WSPreReservarRS;
-import br.com.infotera.common.WSReserva;
 import br.com.infotera.common.WSReservaRelatorioRQ;
 import br.com.infotera.common.WSReservaRelatorioRS;
 import br.com.infotera.common.destino.rqrs.WSDestinoRQ;
@@ -19,7 +18,6 @@ import br.com.infotera.common.destino.rqrs.WSDestinoRS;
 import br.com.infotera.common.hotel.HotelImpl;
 import br.com.infotera.common.hotel.WSAlteraReservaRQ;
 import br.com.infotera.common.hotel.WSAlteraReservaRS;
-import br.com.infotera.common.hotel.WSConsultaReservaRQ;
 import br.com.infotera.common.hotel.rqrs.WSDetalheHotelRQ;
 import br.com.infotera.common.hotel.rqrs.WSDetalheHotelRS;
 import br.com.infotera.common.hotel.rqrs.WSDisponibilidadeHotelRQ;
@@ -80,7 +78,7 @@ public class EzlinkWS implements HotelImpl {
     @Override
     public WSReservaRS consulta(WSReservaRQ reservaRQ) throws ErrorException {
         try {
-            return montaWS.consulta(reservaRQ);
+            return montaWS.consultar(reservaRQ);
         } catch (ErrorException ex) {
             return new WSReservaRS(null, ex.getIntegrador());
         }
@@ -98,7 +96,7 @@ public class EzlinkWS implements HotelImpl {
     @Override
     public WSDetalheHotelRS detalheHotel(WSDetalheHotelRQ detalheHotelRQ) throws ErrorException {
         try {
-            return montaWS.detalheHotel(detalheHotelRQ);
+            return montaWS.detalharHotel(detalheHotelRQ);
         } catch (ErrorException ex) {
             return new WSDetalheHotelRS(null, ex.getIntegrador());
         }
@@ -107,7 +105,7 @@ public class EzlinkWS implements HotelImpl {
     @Override
     public WSPesquisaHotelRS pesquisaHotel(WSPesquisaHotelRQ pesquisaHotelRQ) throws ErrorException {
         try {
-            return montaWS.pesquisaHotel(pesquisaHotelRQ);
+            return montaWS.pesquisarHotel(pesquisaHotelRQ);
         } catch (ErrorException ex) {
             return new WSPesquisaHotelRS(null, ex.getIntegrador());
         }
@@ -124,7 +122,7 @@ public class EzlinkWS implements HotelImpl {
 
     @Override
     public WSTarifarHotelRS tarifar(WSTarifarHotelRQ tarifarHotelRQ) throws ErrorException {
-                try {
+        try {
             return montaWS.tarifar(tarifarHotelRQ);
         } catch (ErrorException ex) {
             return new WSTarifarHotelRS(null, ex.getIntegrador());
