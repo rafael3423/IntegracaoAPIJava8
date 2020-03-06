@@ -12,6 +12,8 @@ import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSIntegradorLogTipoEnum;
 import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.util.Utils;
+import br.com.infotera.it.ezlink.model.Erro;
+import br.com.infotera.it.ezlink.model.Errors;
 import br.com.infotera.it.ezlink.rqrs.BookRQ;
 import br.com.infotera.it.ezlink.rqrs.BookRS;
 import br.com.infotera.it.ezlink.rqrs.CancelRQ;
@@ -30,6 +32,8 @@ import br.com.infotera.it.ezlink.rqrs.SearchByHotelRQ;
 import br.com.infotera.it.ezlink.rqrs.SearchByHotelRS;
 import com.google.gson.Gson;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -47,6 +51,7 @@ public class ChamaWS {
 
         Long tempoInicio = System.currentTimeMillis();// mede o tempo que ira fazer a chamada DAS CONEXÕES
         Object objResponse = null;// cria um objeto vazio objResponse
+        Object objTest = null;
         Response r;
         String metodo = null;
         String endpoint;
@@ -80,12 +85,14 @@ public class ChamaWS {
                             .invoke();
 
                     String ret = r.readEntity(String.class);//atribui a string ret a resposta do post
-                    request = gson.toJson(envio);
                     response = ret;
+                    request = gson.toJson(envio);
+
                     objResponse = gson.fromJson(ret, SearchByDestRS.class);//atribui ao objresponse a conversão de json para objeto obtido no ret e diz que ele é do tipo AutorizarRs classe
+                    verificaErro(integrador, objResponse, r.getStatus());
 
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+
                     throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
                 }
 
@@ -107,10 +114,12 @@ public class ChamaWS {
                     String ret = r.readEntity(String.class);//atribui a string ret a resposta do post
                     request = gson.toJson(envio);
                     response = ret;
+
                     objResponse = gson.fromJson(ret, SearchByHotelRS.class);//atribui ao objresponse a conversão de json para objeto obtido no ret e diz que ele é do tipo AutorizarRs classe
+                    verificaErro(integrador, objResponse, r.getStatus());
 
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+
                     throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
                 }
 
@@ -133,9 +142,10 @@ public class ChamaWS {
                     request = gson.toJson(envio);
                     response = ret;
                     objResponse = gson.fromJson(ret, QuoteRS.class);//atribui ao objresponse a conversão de json para objeto obtido no ret e diz que ele é do tipo AutorizarRs classe
+                    verificaErro(integrador, objResponse, r.getStatus());
 
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+
                     throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
                 }
 
@@ -157,10 +167,12 @@ public class ChamaWS {
                     String ret = r.readEntity(String.class);//atribui a string ret a resposta do post
                     request = gson.toJson(envio);
                     response = ret;
+
                     objResponse = gson.fromJson(ret, BookRS.class);//atribui ao objresponse a conversão de json para objeto obtido no ret e diz que ele é do tipo AutorizarRs classe
+                    verificaErro(integrador, objResponse, r.getStatus());
 
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+
                     throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
                 }
 
@@ -184,10 +196,12 @@ public class ChamaWS {
                     String ret = r.readEntity(String.class);//atribui a string ret a resposta do post
                     request = gson.toJson(envio);
                     response = ret;
+
                     objResponse = gson.fromJson(ret, ListRS.class);//atribui ao objresponse a conversão de json para objeto obtido no ret e diz que ele é do tipo AutorizarRs classe
+                    verificaErro(integrador, objResponse, r.getStatus());
 
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+
                     throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
                 }
 
@@ -213,10 +227,12 @@ public class ChamaWS {
                     String ret = r.readEntity(String.class);//atribui a string ret a resposta do post
                     request = gson.toJson(envio);
                     response = ret;
+
                     objResponse = gson.fromJson(ret, DetailsRS.class);//atribui ao objresponse a conversão de json para objeto obtido no ret e diz que ele é do tipo AutorizarRs classe
+                    verificaErro(integrador, objResponse, r.getStatus());
 
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+
                     throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
                 }
 
@@ -239,10 +255,12 @@ public class ChamaWS {
                     String ret = r.readEntity(String.class);//atribui a string ret a resposta do post
                     request = gson.toJson(envio);
                     response = ret;
+
                     objResponse = gson.fromJson(ret, CancelRS.class);//atribui ao objresponse a conversão de json para objeto obtido no ret e diz que ele é do tipo AutorizarRs classe
+                    verificaErro(integrador, objResponse, r.getStatus());
 
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+
                     throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
                 }
 
@@ -266,10 +284,12 @@ public class ChamaWS {
                     String ret = r.readEntity(String.class);//atribui a string ret a resposta do post
                     request = gson.toJson(envio);
                     response = ret;
+
                     objResponse = gson.fromJson(ret, HotelsRS.class);//atribui ao objresponse a conversão de json para objeto obtido no ret e diz que ele é do tipo AutorizarRs classe
+                    verificaErro(integrador, objResponse, r.getStatus());
 
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+
                     throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
                 }
 
@@ -278,7 +298,7 @@ public class ChamaWS {
 
 //            System.out.println("REQUEST--" + RQ + "-->" + request.toString()); // Printa o request que recebe do info e envia para o conector
 //            System.out.println("RESPONSE --" + RS + "-->" + response.toString());// Printa o response que vem do conecotr e envia para o info
-            
+
             integrador.setIntegradorLogList(Utils.adicionaIntegradorLog(integrador,
                     WSIntegradorLogTipoEnum.JSON,
                     metodo,
@@ -286,6 +306,33 @@ public class ChamaWS {
                     response.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", ""),
                     Utils.tempoExecucaoSeg(tempoInicio)));
         }
+
         return retorno.cast(objResponse);
+    }
+
+    public void verificaErro(WSIntegrador integrador, Object objeto, int status) throws ErrorException {
+        {
+
+            Erro erro = (Erro) objeto;
+            String msgerro = null;
+
+            if (status != 200) {
+                for (Errors errors : erro.getErrors()) {
+
+                    for (String message : errors.getMessages()) {
+
+                        if (msgerro == null) {
+                            msgerro = message;
+                        } else {
+                            msgerro = msgerro + message;
+                        }
+
+                    }
+                }
+                throw new ErrorException(integrador, ChamaWS.class, "verificaErro", WSMensagemErroEnum.GENMETHOD, "Erro no conector: " + status + " - " + msgerro, WSIntegracaoStatusEnum.NEGADO, null);
+
+            }
+        }
+
     }
 }

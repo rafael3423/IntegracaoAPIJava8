@@ -5,13 +5,14 @@
  */
 package br.com.infotera.it.ezlink.rqrs;
 
+import br.com.infotera.it.ezlink.model.Erro;
 import br.com.infotera.it.ezlink.model.SearchResponse;
 
 /**
  *
  * @author rafael
  */
-public class SearchByHotelRS {
+public class SearchByHotelRS extends Erro{
 
     private SearchResponse searchResponse;
 

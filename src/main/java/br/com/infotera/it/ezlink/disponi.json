@@ -1,81 +1,423 @@
 {
-    "cancelledBooking": {
-        "id": 1406,
-        "hotels": [{
-                "id": "5c07df3e0b17ed294b3f1b6f",
-                "name": "Hostal Maria Luisa",
+    "searchResponse": {
+        "searchCompleted": true,
+        "searchToken": "95a436d0-5fc3-11ea-86a6-17c60af947e6",
+        "tokenCreation": "2020-03-06T16:00:22Z",
+        "totalHotelsReturned": 2,
+        "responseTime": 2151,
+        "searchQuery": {
+            "checkIn": "2020-03-31",
+            "checkOut": "2020-04-01",
+            "hotelIds": ["5d4339f24a3ba727988e74a0", "5c07df3e0b17ed294b3f1b6f"],
+            "nationality": "BR",
+            "timeout": 40000,
+            "hotelInfo": true,
+            "rooms": [{
+                    "adults": 2
+                }]
+        },
+        "searchResults": [{
+                "hotelId": "5c07df3e0b17ed294b3f1b6f",
+                "hotelName": "Hostal Maria Luisa",
                 "category": 2,
                 "localization": {
                     "address": "Calle de Hortaleza 19, 2nd floor",
-                    "coordinates": [-3.70019, 40.42157],
                     "destinationId": "5d652a0e37f0a05da7a94a8e",
                     "destination": "Madrid,  Spain",
-                    "countryISO2": "ES"
+                    "countryISO2": "ES",
+                    "coordinates": [-3.70019, 40.42157]
                 },
-                "rooms": [{
-                        "id": 1846,
-                        "checkIn": "2020-08-12",
-                        "checkOut": "2020-08-14",
-                        "status": "Cancelled",
-                        "name": "Double Room Single Use (2 Twin Beds)",
-                        "board": "No Board",
-                        "price": {
-                            "currency": "BRL",
-                            "value": 568.82
-                        },
-                        "pax": [{
-                                "firstName": "ANTONIETA",
-                                "lastName": "PARIS",
-                                "age": 40,
-                                "type": "ADT"
-                            }],
-                        "cancellationPolicies": {
+                "rooms": [[{
+                            "roomId": "96ea7270-5fc3-11ea-86a6-17c60af947e6",
+                            "roomName": "Double Or Twin Room (3 Twin Beds)",
+                            "board": {
+                                "boardCode": 5,
+                                "boardName": "No Board"
+                            },
+                            "price": {
+                                "currency": "BRL",
+                                "value": 362.44
+                            },
+                            "refundable": false,
+                            "cancellationPolicies": {
+                                "penalties": [{
+                                        "from": "2020-03-04T03:00:00.000Z",
+                                        "price": {
+                                            "currency": "BRL",
+                                            "value": 352.33
+                                        }
+                                    }]
+                            }
+                        }, {
+                            "roomId": "96ea9980-5fc3-11ea-86a6-17c60af947e6",
+                            "roomName": "Double Or Twin Room (1 Double Bed)",
+                            "board": {
+                                "boardCode": 5,
+                                "boardName": "No Board"
+                            },
+                            "price": {
+                                "currency": "BRL",
+                                "value": 362.44
+                            },
+                            "refundable": false,
+                            "cancellationPolicies": {
+                                "penalties": [{
+                                        "from": "2020-03-04T03:00:00.000Z",
+                                        "price": {
+                                            "currency": "BRL",
+                                            "value": 352.33
+                                        }
+                                    }]
+                            }
+                        }, {
+                            "roomId": "96eac090-5fc3-11ea-86a6-17c60af947e6",
+                            "roomName": "Double Or Twin Room (3 Twin Beds)",
+                            "board": {
+                                "boardCode": 5,
+                                "boardName": "No Board"
+                            },
+                            "price": {
+                                "currency": "BRL",
+                                "value": 363.28
+                            },
+                            "refundable": false,
+                            "cancellationPolicies": {
+                                "penalties": [{
+                                        "from": "2020-03-04T03:00:00.000Z",
+                                        "price": {
+                                            "currency": "BRL",
+                                            "value": 353.17
+                                        }
+                                    }]
+                            }
+                        }, {
+                            "roomId": "96eac091-5fc3-11ea-86a6-17c60af947e6",
+                            "roomName": "Double Or Twin Room (1 Double Bed)",
+                            "board": {
+                                "boardCode": 5,
+                                "boardName": "No Board"
+                            },
+                            "price": {
+                                "currency": "BRL",
+                                "value": 363.28
+                            },
+                            "refundable": false,
+                            "cancellationPolicies": {
+                                "penalties": [{
+                                        "from": "2020-03-04T03:00:00.000Z",
+                                        "price": {
+                                            "currency": "BRL",
+                                            "value": 353.17
+                                        }
+                                    }]
+                            }
+                        }, {
+                            "roomId": "96eae7a0-5fc3-11ea-86a6-17c60af947e6",
+                            "roomName": "Double Or Twin Room (3 Twin Beds)",
+                            "board": {
+                                "boardCode": 5,
+                                "boardName": "No Board"
+                            },
+                            "price": {
+                                "currency": "BRL",
+                                "value": 479.91
+                            },
                             "refundable": true,
-                            "penalties": [{
-                                    "from": "2020-08-06T16:00:00.000Z",
-                                    "price": {
-                                        "currency": "BRL",
-                                        "value": 280.73
-                                    }
-                                }]
-                        },
-                        "remarks": "**** THIS IS A TEST BOOKING ****"
-                    }, {
-                        "id": 1847,
-                        "checkIn": "2020-08-12",
-                        "checkOut": "2020-08-14",
-                        "status": "Cancelled",
-                        "name": "Double Or Twin Room (3 Twin Beds)",
-                        "board": "No Board",
-                        "price": {
-                            "currency": "BRL",
-                            "value": 773.86
-                        },
-                        "pax": [{
-                                "firstName": "EMÍDIA",
-                                "lastName": "QUEIROZ",
-                                "age": 40,
-                                "type": "ADT"
-                            }, {
-                                "firstName": "CÍRIA",
-                                "lastName": "MELLO",
-                                "age": 40,
-                                "type": "ADT"
-                            }],
-                        "cancellationPolicies": {
+                            "cancellationPolicies": {
+                                "penalties": [{
+                                        "from": "2020-03-25T16:00:00.000Z",
+                                        "price": {
+                                            "currency": "BRL",
+                                            "value": 471.86
+                                        }
+                                    }]
+                            }
+                        }, {
+                            "roomId": "96eb0eb0-5fc3-11ea-86a6-17c60af947e6",
+                            "roomName": "Double Or Twin Room (1 Double Bed)",
+                            "board": {
+                                "boardCode": 5,
+                                "boardName": "No Board"
+                            },
+                            "price": {
+                                "currency": "BRL",
+                                "value": 479.91
+                            },
                             "refundable": true,
-                            "penalties": [{
-                                    "from": "2020-08-06T16:00:00.000Z",
-                                    "price": {
-                                        "currency": "BRL",
-                                        "value": 383.66
-                                    }
-                                }]
-                        },
-                        "remarks": "**** THIS IS A TEST BOOKING ****"
-                    }]
-            }],
-        "customerBookingId": null,
-        "createdAt": "2020-03-05T21:25:32.226Z"
+                            "cancellationPolicies": {
+                                "penalties": [{
+                                        "from": "2020-03-25T16:00:00.000Z",
+                                        "price": {
+                                            "currency": "BRL",
+                                            "value": 471.86
+                                        }
+                                    }]
+                            }
+                        }, {
+                            "roomId": "96eb35c0-5fc3-11ea-86a6-17c60af947e6",
+                            "roomName": "Triple Room (1 Double Bed And 1 Twin Bed)",
+                            "board": {
+                                "boardCode": 5,
+                                "boardName": "No Board"
+                            },
+                            "price": {
+                                "currency": "BRL",
+                                "value": 492.81
+                            },
+                            "refundable": false,
+                            "cancellationPolicies": {
+                                "penalties": [{
+                                        "from": "2020-03-04T03:00:00.000Z",
+                                        "price": {
+                                            "currency": "BRL",
+                                            "value": 482.7
+                                        }
+                                    }]
+                            }
+                        }, {
+                            "roomId": "96eb5cd0-5fc3-11ea-86a6-17c60af947e6",
+                            "roomName": "Triple Room (1 Double Bed And 1 Twin Bed)",
+                            "board": {
+                                "boardCode": 5,
+                                "boardName": "No Board"
+                            },
+                            "price": {
+                                "currency": "BRL",
+                                "value": 493.97
+                            },
+                            "refundable": false,
+                            "cancellationPolicies": {
+                                "penalties": [{
+                                        "from": "2020-03-04T03:00:00.000Z",
+                                        "price": {
+                                            "currency": "BRL",
+                                            "value": 483.91
+                                        }
+                                    }]
+                            }
+                        }, {
+                            "roomId": "96eb5cd1-5fc3-11ea-86a6-17c60af947e6",
+                            "roomName": "Triple Room (1 Double Bed And 1 Twin Bed)",
+                            "board": {
+                                "boardCode": 5,
+                                "boardName": "No Board"
+                            },
+                            "price": {
+                                "currency": "BRL",
+                                "value": 653.78
+                            },
+                            "refundable": true,
+                            "cancellationPolicies": {
+                                "penalties": [{
+                                        "from": "2020-03-25T16:00:00.000Z",
+                                        "price": {
+                                            "currency": "BRL",
+                                            "value": 646.46
+                                        }
+                                    }]
+                            }
+                        }]]
+            }, {
+                "hotelId": "5d4339f24a3ba727988e74a0",
+                "hotelName": "Exe Madrid Norte",
+                "category": 4,
+                "localization": {
+                    "address": "Calle Martina Diaz, 4",
+                    "destinationId": "5d652a0e37f0a05da7a94a8e",
+                    "destination": "Madrid,  Spain",
+                    "countryISO2": "ES",
+                    "coordinates": [-3.66991, 40.49092]
+                },
+                "rooms": [[{
+                            "roomId": "96eb83e0-5fc3-11ea-86a6-17c60af947e6",
+                            "roomName": "Double Room (1 Double Bed)",
+                            "board": {
+                                "boardCode": 5,
+                                "boardName": "No Board"
+                            },
+                            "price": {
+                                "currency": "BRL",
+                                "value": 620.61
+                            },
+                            "refundable": false,
+                            "cancellationPolicies": {
+                                "penalties": [{
+                                        "from": "2020-03-04T03:00:00.000Z",
+                                        "price": {
+                                            "currency": "BRL",
+                                            "value": 610.5
+                                        }
+                                    }]
+                            }
+                        }, {
+                            "roomId": "96ebaaf0-5fc3-11ea-86a6-17c60af947e6",
+                            "roomName": "Single Room (plus Sofa Bed) (1 Double Bed And 1 Twin Sofa Bed)",
+                            "board": {
+                                "boardCode": 5,
+                                "boardName": "No Board"
+                            },
+                            "price": {
+                                "currency": "BRL",
+                                "value": 620.61
+                            },
+                            "refundable": false,
+                            "cancellationPolicies": {
+                                "penalties": [{
+                                        "from": "2020-03-04T03:00:00.000Z",
+                                        "price": {
+                                            "currency": "BRL",
+                                            "value": 610.5
+                                        }
+                                    }]
+                            }
+                        }, {
+                            "roomId": "96ebaaf1-5fc3-11ea-86a6-17c60af947e6",
+                            "roomName": "Double Room (1 Double Bed)",
+                            "board": {
+                                "boardCode": 5,
+                                "boardName": "No Board"
+                            },
+                            "price": {
+                                "currency": "BRL",
+                                "value": 651.2
+                            },
+                            "refundable": false,
+                            "cancellationPolicies": {
+                                "penalties": [{
+                                        "from": "2020-03-04T03:00:00.000Z",
+                                        "price": {
+                                            "currency": "BRL",
+                                            "value": 641.15
+                                        }
+                                    }]
+                            }
+                        }, {
+                            "roomId": "96ebaaf2-5fc3-11ea-86a6-17c60af947e6",
+                            "roomName": "Single Room (plus Sofa Bed) (1 Double Bed And 1 Twin Sofa Bed)",
+                            "board": {
+                                "boardCode": 5,
+                                "boardName": "No Board"
+                            },
+                            "price": {
+                                "currency": "BRL",
+                                "value": 651.2
+                            },
+                            "refundable": false,
+                            "cancellationPolicies": {
+                                "penalties": [{
+                                        "from": "2020-03-04T03:00:00.000Z",
+                                        "price": {
+                                            "currency": "BRL",
+                                            "value": 641.15
+                                        }
+                                    }]
+                            }
+                        }, {
+                            "roomId": "96ebd200-5fc3-11ea-86a6-17c60af947e6",
+                            "roomName": "Triple Room (1 Queen Bed And 1 Large Twin Sofa Bed)",
+                            "board": {
+                                "boardCode": 5,
+                                "boardName": "No Board"
+                            },
+                            "price": {
+                                "currency": "BRL",
+                                "value": 690.49
+                            },
+                            "refundable": false,
+                            "cancellationPolicies": {
+                                "penalties": [{
+                                        "from": "2020-03-04T03:00:00.000Z",
+                                        "price": {
+                                            "currency": "BRL",
+                                            "value": 680.38
+                                        }
+                                    }]
+                            }
+                        }, {
+                            "roomId": "96ebf910-5fc3-11ea-86a6-17c60af947e6",
+                            "roomName": "Triple Room (1 Queen Bed And 1 Large Twin Sofa Bed)",
+                            "board": {
+                                "boardCode": 5,
+                                "boardName": "No Board"
+                            },
+                            "price": {
+                                "currency": "BRL",
+                                "value": 725.24
+                            },
+                            "refundable": false,
+                            "cancellationPolicies": {
+                                "penalties": [{
+                                        "from": "2020-03-04T03:00:00.000Z",
+                                        "price": {
+                                            "currency": "BRL",
+                                            "value": 715.13
+                                        }
+                                    }]
+                            }
+                        }, {
+                            "roomId": "96ebf911-5fc3-11ea-86a6-17c60af947e6",
+                            "roomName": "Family Room (1 Queen Bed And 1 Large Twin Sofa Bed)",
+                            "board": {
+                                "boardCode": 5,
+                                "boardName": "No Board"
+                            },
+                            "price": {
+                                "currency": "BRL",
+                                "value": 725.82
+                            },
+                            "refundable": false,
+                            "cancellationPolicies": {
+                                "penalties": [{
+                                        "from": "2020-03-04T03:00:00.000Z",
+                                        "price": {
+                                            "currency": "BRL",
+                                            "value": 715.76
+                                        }
+                                    }]
+                            }
+                        }, {
+                            "roomId": "96ec2020-5fc3-11ea-86a6-17c60af947e6",
+                            "roomName": "Double Room (1 Double Bed)",
+                            "board": {
+                                "boardCode": 1,
+                                "boardName": "Breakfast"
+                            },
+                            "price": {
+                                "currency": "BRL",
+                                "value": 760.68
+                            },
+                            "refundable": false,
+                            "cancellationPolicies": {
+                                "penalties": [{
+                                        "from": "2020-03-04T03:00:00.000Z",
+                                        "price": {
+                                            "currency": "BRL",
+                                            "value": 750.57
+                                        }
+                                    }]
+                            }
+                        }, {
+                            "roomId": "96ec2021-5fc3-11ea-86a6-17c60af947e6",
+                            "roomName": "Family Room (1 Queen Bed And 1 Large Twin Sofa Bed)",
+                            "board": {
+                                "boardCode": 5,
+                                "boardName": "No Board"
+                            },
+                            "price": {
+                                "currency": "BRL",
+                                "value": 762.15
+                            },
+                            "refundable": false,
+                            "cancellationPolicies": {
+                                "penalties": [{
+                                        "from": "2020-03-04T03:00:00.000Z",
+                                        "price": {
+                                            "currency": "BRL",
+                                            "value": 752.09
+                                        }
+                                    }]
+                            }
+                        }]]
+            }]
     }
 }

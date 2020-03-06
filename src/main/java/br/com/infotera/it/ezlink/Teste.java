@@ -55,7 +55,7 @@ public class Teste {
                 dsCredencialList);
 
 //        //DISPONIBILIDADE
-        Date dtreservaFrom = Utils.toDate("28-04-2020", "dd-MM-yyyy");
+        Date dtreservaFrom = Utils.toDate("08-01-2020", "dd-MM-yyyy");
         Date dtReservaTo = Utils.toDate("29-04-2020", "dd-MM-yyyy");
 
         List<WSConfigUh> configUh = new ArrayList();
@@ -78,61 +78,61 @@ public class Teste {
         Printa.disponibilidadeHotel(hotelRS, false, false);
 //////        PRE RESERVA
 //
-        WSReservaHotelUh preReservaHotelUh = new WSReservaHotelUh(1,
-                hotelRS.getHotelPesquisaList().get(0).getQuartoList().get(0).getQuartoUhList().get(0).getUh(),
-                hotelRS.getHotelPesquisaList().get(0).getQuartoList().get(0).getQuartoUhList().get(0).getRegime(),
-                hotelRS.getHotelPesquisaList().get(0).getQuartoList().get(0).getQuartoUhList().get(0).getTarifa(),
-                null,
-                null,
-                hotelRS.getHotelPesquisaList().get(0).getQuartoList().get(0).getConfigUh().getReservaNomeList(),
-                WSReservaStatusEnum.SOLICITACAO);
-
-        List<WSReservaHotelUh> preReservaHotelUhList = Arrays.asList(preReservaHotelUh);
-
-        WSReservaHotel preReservaHotel = new WSReservaHotel(preReservaHotelUhList);
-
-        preReservaHotel.setDsParametro(hotelRS.getHotelPesquisaList().get(0).getDsParametro());
-
-        WSReserva preReserva = new WSReserva(preReservaHotel);
-
-        WSPreReservarRQ preReservarRQ = new WSPreReservarRQ(integrador, preReserva);
-
-        preReservarRQ.setDtEntrada(dtreservaFrom);
-        preReservarRQ.setDtSaida(dtReservaTo);
-
-        preReservarRQ.getReserva().getReservaHotel().setHotel(hotelRS.getHotelPesquisaList().get(0).getHotel());
-
-        WSPreReservarRS preReservarRS = ezLinkWS.preReservar(preReservarRQ);
-
-        Printa.reserva(preReservarRS.getIntegrador(), preReservarRS.getReserva(), true, true);
-
-        System.out.println(preReservarRS);
+//        WSReservaHotelUh preReservaHotelUh = new WSReservaHotelUh(1,
+//                hotelRS.getHotelPesquisaList().get(0).getQuartoList().get(0).getQuartoUhList().get(0).getUh(),
+//                hotelRS.getHotelPesquisaList().get(0).getQuartoList().get(0).getQuartoUhList().get(0).getRegime(),
+//                hotelRS.getHotelPesquisaList().get(0).getQuartoList().get(0).getQuartoUhList().get(0).getTarifa(),
+//                null,
+//                null,
+//                hotelRS.getHotelPesquisaList().get(0).getQuartoList().get(0).getConfigUh().getReservaNomeList(),
+//                WSReservaStatusEnum.SOLICITACAO);
+//
+//        List<WSReservaHotelUh> preReservaHotelUhList = Arrays.asList(preReservaHotelUh);
+//
+//        WSReservaHotel preReservaHotel = new WSReservaHotel(preReservaHotelUhList);
+//
+//        preReservaHotel.setDsParametro(hotelRS.getHotelPesquisaList().get(0).getDsParametro());
+//
+//        WSReserva preReserva = new WSReserva(preReservaHotel);
+//
+//        WSPreReservarRQ preReservarRQ = new WSPreReservarRQ(integrador, preReserva);
+//
+//        preReservarRQ.setDtEntrada(dtreservaFrom);
+//        preReservarRQ.setDtSaida(dtReservaTo);
+//
+//        preReservarRQ.getReserva().getReservaHotel().setHotel(hotelRS.getHotelPesquisaList().get(0).getHotel());
+//
+//        WSPreReservarRS preReservarRS = ezLinkWS.preReservar(preReservarRQ);
+//
+//        Printa.reserva(preReservarRS.getIntegrador(), preReservarRS.getReserva(), true, true);
+//
+//        System.out.println(preReservarRS);
 //
 ////       RESERVA
-        WSReservaHotelUh reservaHotelUh = new WSReservaHotelUh(1,
-                hotelRS.getHotelPesquisaList().get(0).getQuartoList().get(0).getQuartoUhList().get(0).getUh(),
-                preReservarRS.getReserva().getReservaHotel().getReservaHotelUhList().get(0).getRegime(),
-                preReservarRS.getReserva().getReservaHotel().getReservaHotelUhList().get(0).getTarifa(),
-                preReservarRS.getReserva().getReservaHotel().getReservaHotelUhList().get(0).getDtEntrada(),
-                preReservarRS.getReserva().getReservaHotel().getReservaHotelUhList().get(0).getDtSaida(),
-                reservaNomeList,
-                WSReservaStatusEnum.RESERVADO);
-
-        List<WSReservaHotelUh> reservaHotelUhList = Arrays.asList(reservaHotelUh);
-
-        WSReservaHotel reservaHotel = new WSReservaHotel(reservaHotelUhList);
-        reservaHotel.setDsParametro(preReservarRS.getReserva().getReservaHotel().getDsParametro());
-        WSReserva reserva = new WSReserva(reservaHotel);
-
-        WSReservarRS reservarRS = ezLinkWS.reservar(new WSReservarRQ(integrador, reserva));
-
-        Printa.reserva(reservarRS.getIntegrador(), reservarRS.getReserva(), true, true);
+//        WSReservaHotelUh reservaHotelUh = new WSReservaHotelUh(1,
+//                hotelRS.getHotelPesquisaList().get(0).getQuartoList().get(0).getQuartoUhList().get(0).getUh(),
+//                preReservarRS.getReserva().getReservaHotel().getReservaHotelUhList().get(0).getRegime(),
+//                preReservarRS.getReserva().getReservaHotel().getReservaHotelUhList().get(0).getTarifa(),
+//                preReservarRS.getReserva().getReservaHotel().getReservaHotelUhList().get(0).getDtEntrada(),
+//                preReservarRS.getReserva().getReservaHotel().getReservaHotelUhList().get(0).getDtSaida(),
+//                reservaNomeList,
+//                WSReservaStatusEnum.RESERVADO);
+//
+//        List<WSReservaHotelUh> reservaHotelUhList = Arrays.asList(reservaHotelUh);
+//
+//        WSReservaHotel reservaHotel = new WSReservaHotel(reservaHotelUhList);
+//        reservaHotel.setDsParametro(preReservarRS.getReserva().getReservaHotel().getDsParametro());
+//        WSReserva reserva = new WSReserva(reservaHotel);
+//
+//        WSReservarRS reservarRS = ezLinkWS.reservar(new WSReservarRQ(integrador, reserva));
+//
+//        Printa.reserva(reservarRS.getIntegrador(), reservarRS.getReserva(), true, true);
 //
 ////CONSULTA
-        WSReserva consultaReserva = new WSReserva(new WSReservaHotel("1109"));
-
-        WSReservaRS reservaRS = ezLinkWS.consulta(new WSReservaRQ(integrador, consultaReserva));
-        Printa.reserva(integrador, reservaRS.getReserva(), true, true);
+//        WSReserva consultaReserva = new WSReserva(new WSReservaHotel("1109"));
+//
+//        WSReservaRS reservaRS = ezLinkWS.consulta(new WSReservaRQ(integrador, consultaReserva));
+//        Printa.reserva(integrador, reservaRS.getReserva(), true, true);
 //
 //        // RESERVA RELATORIO
 ////        Date dtReservaFrom = Utils.toDate("01-01-2020","dd-MM-yyyy");
@@ -154,19 +154,19 @@ public class Teste {
 ////        }
 
 //CANCELA RESERVA
-        WSReservaHotel cancelaReservaHotel = new WSReservaHotel();
-        cancelaReservaHotel.setNrLocalizador(reservaRS.getReserva().getReservaHotel().getNrLocalizador());
-
-        WSReserva cancelarReserva = new WSReserva(cancelaReservaHotel);
-
-        WSReservaRS cancelaReservaRS = ezLinkWS.cancelar(new WSReservaRQ(integrador, cancelarReserva));
-
-        Printa.reserva(integrador, cancelaReservaRS.getReserva(), true, true);
-
-        WSHotel hotelid = new WSHotel();
-        hotelid.setIdExterno("5d43447d4c523e611261730e");
-        
-        ezLinkWS.detalheHotel(new WSDetalheHotelRQ(integrador, hotelid));
+//        WSReservaHotel cancelaReservaHotel = new WSReservaHotel();
+//        cancelaReservaHotel.setNrLocalizador(reservaRS.getReserva().getReservaHotel().getNrLocalizador());
+//
+//        WSReserva cancelarReserva = new WSReserva(cancelaReservaHotel);
+//
+//        WSReservaRS cancelaReservaRS = ezLinkWS.cancelar(new WSReservaRQ(integrador, cancelarReserva));
+//
+//        Printa.reserva(integrador, cancelaReservaRS.getReserva(), true, true);
+//
+//        WSHotel hotelid = new WSHotel();
+//        hotelid.setIdExterno("5d43447d4c523e611261730e");
+//        
+//        ezLinkWS.detalheHotel(new WSDetalheHotelRQ(integrador, hotelid));
 //            ezLinkWS.pesquisaHotel(new WSPesquisaHotelRQ(integrador, null, true));
     }
 }
