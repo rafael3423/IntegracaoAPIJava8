@@ -52,16 +52,21 @@ public class DisponibilidadeWS {
      */
     public WSDisponibilidadeHotelRS disponibilidade(WSDisponibilidadeHotelRQ disponibilidadeRQ) throws ErrorException {
 
-        String metodo = "disponibilidade";
-        List<String> hotelIdsList = new ArrayList();
+        List<String> hotelIdsList = null;
         List<Room> roomList = new ArrayList();
-        try {
+        String destino = null;
 
-            for (WSHotel hid : disponibilidadeRQ.getHotelList()) { // Abre a lista de hotel enviado pelo dispRQ e vai colocando no hotelIdsList
-                hotelIdsList.add(hid.getIdExterno());
+        if (disponibilidadeRQ.getMunicipioId() != null && !disponibilidadeRQ.getMunicipioId().equals("")) {
+            destino = disponibilidadeRQ.getMunicipioId();
+        } else {
+            try {
+                hotelIdsList = new ArrayList();
+                for (WSHotel hid : disponibilidadeRQ.getHotelList()) { // Abre a lista de hotel enviado pelo dispRQ e vai colocando no hotelIdsList
+                    hotelIdsList.add(hid.getIdExterno());
+                }
+            } catch (Exception ex) {
+                throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, "disponibilidade", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao consultar os hóteis disponiveis", WSIntegracaoStatusEnum.NEGADO, ex);
             }
-        } catch (Exception ex) {
-            throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, "disponibilidade", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao consultar os hóteis disponiveis", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         Map<Integer, WSConfigUh> configUhMap = new LinkedHashMap(); // Configura o Map novo com a chave de int, do tipo WSConfigUh
@@ -93,7 +98,7 @@ public class DisponibilidadeWS {
                             idadeCriancaList.add(rn.getQtIdade());
                         } //define a idade da criança
                         else {
-                            throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Idade máxima para crianças: 11 anos", WSIntegracaoStatusEnum.NEGADO, null);
+                            throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, "disponibilidade", WSMensagemErroEnum.GENMETHOD, "Idade máxima para crianças: 11 anos", WSIntegracaoStatusEnum.NEGADO, null);
                         }
                     }
 
@@ -113,14 +118,17 @@ public class DisponibilidadeWS {
         String dtcheckIn = Utils.formatData(disponibilidadeRQ.getDtEntrada(), "yyyy-MM-dd"); // Converte para string a data check in fornecida pelo infotravel
         String dtcheckOut = Utils.formatData(disponibilidadeRQ.getDtSaida(), "yyyy-MM-dd"); // Converte para string a data check out fornecida pelo infotravel
 
+        Integer timeout = disponibilidadeRQ.getIntegrador().getTimeoutSegundos() * 1000;
+
         SearchByHotelRQ searchByHotelRQ = new SearchByHotelRQ( //monta o searchByHotelRQ com a informações que vem do dispRQ
                 dtcheckIn,
                 dtcheckOut,
                 hotelIdsList,
                 "BR",
-                40000,
+                timeout,
                 true,
-                roomList);
+                roomList,
+                destino);
 
         SearchByHotelRS searchByHotelRS = chamaWS.chamadaPadrao(disponibilidadeRQ.getIntegrador(), searchByHotelRQ, SearchByHotelRS.class);
 

@@ -16,16 +16,18 @@ public class SearchByHotelRQ {
 
     private String checkIn;
     private String checkOut;
+
     private List<String> hotelIds;
     private String nationality;
     private Integer timeout;
     private Boolean hotelInfo;
     private List<Room> rooms;
+    private String destinationId;
 
     public SearchByHotelRQ() {
     }
 
-    public SearchByHotelRQ(String checkIn, String checkOut, List<String> hotelIds, String nationality, Integer timeout, Boolean hotelInfo, List<Room> rooms) {
+    public SearchByHotelRQ(String checkIn, String checkOut, List<String> hotelIds, String nationality, Integer timeout, Boolean hotelInfo, List<Room> rooms, String destinationId) {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.hotelIds = hotelIds;
@@ -33,6 +35,7 @@ public class SearchByHotelRQ {
         this.timeout = timeout;
         this.hotelInfo = hotelInfo;
         this.rooms = rooms;
+        this.destinationId = destinationId;
     }
 
     public String getCheckIn() {
@@ -89,6 +92,14 @@ public class SearchByHotelRQ {
 
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
+    }
+
+    public String getDestinationId() {
+        return destinationId;
+    }
+
+    public void setDestinationId(String destinationId) {
+        this.destinationId = destinationId;
     }
 
 }

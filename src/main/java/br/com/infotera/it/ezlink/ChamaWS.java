@@ -39,7 +39,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * https://test.ezconnect.link/v1/static/destinations?skip=0&limit=500&order=desc&countryISO2=uk&createdUpdated=2018-12-19
+ * 
  *
  * @author rafael
  */
@@ -55,8 +55,6 @@ public class ChamaWS {
         String request = "";
         String response = "";
         String bookingId;
-        String RQ = null;
-        String RS = null;
 
         Gson gson = new Gson();//cria objeto gson exportado do pom.xml da google que converte json
         try {
@@ -70,8 +68,6 @@ public class ChamaWS {
 
             if (envio instanceof SearchByDestRQ) {//compara se o objeto envio tem a cara de AutorizarRq para entrar na respectiva ação de postar a autorização
                 metodo = "searchByDestinationId";
-                RQ = "Disponibilidade";
-                RS = "Disponibilidade";
 
                 try {
                     r = (Response) client.target(endpoint + "hotel/search")// 
@@ -97,8 +93,6 @@ public class ChamaWS {
 
             if (envio instanceof SearchByHotelRQ) {//compara se o objeto envio tem a cara de AutorizarRq para entrar na respectiva ação de postar a autorização
                 metodo = "searchByHotelIds";
-                RQ = "Disponibilidade";
-                RS = "Disponibilidade";
 
                 try {
                     r = (Response) client.target(endpoint + "hotel/search")// 
@@ -124,8 +118,6 @@ public class ChamaWS {
 
             if (envio instanceof QuoteRQ) {//compara se o objeto envio tem a cara de AutorizarRq para entrar na respectiva ação de postar a autorização
                 metodo = "quote";
-                RQ = "Pre Reserva";
-                RS = "Pre Reserva";
 
                 try {
                     r = (Response) client.target(endpoint + "hotel/quote")// 
@@ -150,8 +142,6 @@ public class ChamaWS {
 
             if (envio instanceof BookRQ) {//compara se o objeto envio tem a cara de AutorizarRq para entrar na respectiva ação de postar a autorização
                 metodo = "book";
-                RQ = "Reservar";
-                RS = "Reservar";
 
                 try {
                     r = (Response) client.target(endpoint + "hotel/book")// 
@@ -177,8 +167,6 @@ public class ChamaWS {
 
             if (envio instanceof ListRQ) {//compara se o objeto envio tem a cara de AutorizarRq para entrar na respectiva ação de postar a autorização
                 metodo = "list";
-                RQ = "Lista";
-                RS = "Lista";
 
                 try {
                     ListRQ listRQ = (ListRQ) envio;
@@ -206,8 +194,6 @@ public class ChamaWS {
 
             if (envio instanceof DetailsRQ) {//compara se o objeto envio tem a cara de AutorizarRq para entrar na respectiva ação de postar a autorização
                 metodo = "details";
-                RQ = "Consulta";
-                RS = "Consulta";
 
                 try {
                     DetailsRQ detailsRQ = (DetailsRQ) envio;
@@ -237,8 +223,6 @@ public class ChamaWS {
 
             if (envio instanceof CancelRQ) {//compara se o objeto envio tem a cara de AutorizarRq para entrar na respectiva ação de postar a autorização
                 metodo = "cancel";
-                RQ = "Cancelar";
-                RS = "Cancelar";
 
                 try {
 
@@ -257,7 +241,6 @@ public class ChamaWS {
                     verificaErro(integrador, objResponse, r.getStatus());
 
                 } catch (Exception ex) {
-
                     throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
                 }
 
@@ -265,9 +248,6 @@ public class ChamaWS {
 
             if (envio instanceof HotelsRQ) {//compara se o objeto envio tem a cara de AutorizarRq para entrar na respectiva ação de postar a autorização
                 metodo = "hotels";
-                RQ = "Detalhe Hotel";
-                RS = "Detalhe Hotel";
-
                 try {
                     HotelsRQ hotelsRQ = (HotelsRQ) envio;
 
@@ -286,7 +266,6 @@ public class ChamaWS {
                     verificaErro(integrador, objResponse, r.getStatus());
 
                 } catch (Exception ex) {
-
                     throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
                 }
 
