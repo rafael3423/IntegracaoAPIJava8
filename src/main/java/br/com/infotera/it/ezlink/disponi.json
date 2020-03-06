@@ -1,10 +1,9 @@
 {
-    "booking": {
-        "id": 1405,
+    "cancelledBooking": {
+        "id": 1406,
         "hotels": [{
-                "_id": "5c07df3e0b17ed294b3f1b6f",
+                "id": "5c07df3e0b17ed294b3f1b6f",
                 "name": "Hostal Maria Luisa",
-                "phone": ["34-915-211630", "34-915-211682"],
                 "category": 2,
                 "localization": {
                     "address": "Calle de Hortaleza 19, 2nd floor",
@@ -14,39 +13,69 @@
                     "countryISO2": "ES"
                 },
                 "rooms": [{
-                        "id": 1845,
-                        "checkIn": "2020-03-16",
-                        "checkOut": "2020-03-19",
-                        "status": "Rejected",
+                        "id": 1846,
+                        "checkIn": "2020-08-12",
+                        "checkOut": "2020-08-14",
+                        "status": "Cancelled",
+                        "name": "Double Room Single Use (2 Twin Beds)",
+                        "board": "No Board",
+                        "price": {
+                            "currency": "BRL",
+                            "value": 568.82
+                        },
+                        "pax": [{
+                                "firstName": "ANTONIETA",
+                                "lastName": "PARIS",
+                                "age": 40,
+                                "type": "ADT"
+                            }],
+                        "cancellationPolicies": {
+                            "refundable": true,
+                            "penalties": [{
+                                    "from": "2020-08-06T16:00:00.000Z",
+                                    "price": {
+                                        "currency": "BRL",
+                                        "value": 280.73
+                                    }
+                                }]
+                        },
+                        "remarks": "**** THIS IS A TEST BOOKING ****"
+                    }, {
+                        "id": 1847,
+                        "checkIn": "2020-08-12",
+                        "checkOut": "2020-08-14",
+                        "status": "Cancelled",
                         "name": "Double Or Twin Room (3 Twin Beds)",
                         "board": "No Board",
                         "price": {
                             "currency": "BRL",
-                            "value": 1037.23
+                            "value": 773.86
                         },
                         "pax": [{
-                                "firstName": "BRANDÃO",
-                                "lastName": "DIAS",
-                                "age": 39,
+                                "firstName": "EMÍDIA",
+                                "lastName": "QUEIROZ",
+                                "age": 40,
                                 "type": "ADT"
                             }, {
-                                "firstName": "ZÉLIO",
-                                "lastName": "RODRIGUES",
-                                "age": 39,
+                                "firstName": "CÍRIA",
+                                "lastName": "MELLO",
+                                "age": 40,
                                 "type": "ADT"
                             }],
                         "cancellationPolicies": {
-                            "refundable": false,
+                            "refundable": true,
                             "penalties": [{
-                                    "from": "2020-03-03T03:00:00.000Z",
+                                    "from": "2020-08-06T16:00:00.000Z",
                                     "price": {
                                         "currency": "BRL",
-                                        "value": 1027.23
+                                        "value": 383.66
                                     }
                                 }]
                         },
                         "remarks": "**** THIS IS A TEST BOOKING ****"
                     }]
-            }]
+            }],
+        "customerBookingId": null,
+        "createdAt": "2020-03-05T21:25:32.226Z"
     }
 }

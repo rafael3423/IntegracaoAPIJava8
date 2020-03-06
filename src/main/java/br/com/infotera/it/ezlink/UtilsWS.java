@@ -5,6 +5,9 @@
  */
 package br.com.infotera.it.ezlink;
 
+import br.com.infotera.common.ErrorException;
+import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
+import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.politica.WSPolitica;
 import br.com.infotera.common.politica.WSPoliticaCancelamento;
 import br.com.infotera.common.politica.WSPoliticaVoucher;
@@ -26,32 +29,31 @@ public class UtilsWS {
 
         if (penaltList != null) {
 
-                for (Penalt p : penaltList) {
+            for (Penalt p : penaltList) {
 
-                    Date dtMaximaCancelamento = Utils.addDias(Utils.toDate(p.getFrom(), "yyyy-MM-dd'T'HH:mm:ss"), -3);
+                Date dtMaximaCancelamento = Utils.addDias(Utils.toDate(p.getFrom(), "yyyy-MM-dd'T'HH:mm:ss"), -3);
 
-                    boolean stImediata = false; //Inicia Multa em normalmente falso
+                boolean stImediata = false; //Inicia Multa em normalmente falso
 
-                    if (new Date().compareTo(dtMaximaCancelamento) == 1) { //Compara se o dia de hoje passou a data máxima de ccanelmento
-                        stImediata = true;  // entra em multa
-                    }
-
-                    if (refundable == false) { // checa se o conector tem prazo de cancelamento
-                        stImediata = true; // entra em multa
-                    }
-
-                    politicaList.add(new WSPoliticaCancelamento("Cancelamento",
-                            "",
-                            p.getPrice().getCurrency(),
-                            p.getPrice().getValue(),
-                            null,
-                            null,
-                            stImediata,
-                            dtMaximaCancelamento,
-                            null,
-                            !refundable));
+                if (new Date().compareTo(dtMaximaCancelamento) == 1) { //Compara se o dia de hoje passou a data máxima de ccanelmento
+                    stImediata = true;  // entra em multa
                 }
 
+                if (refundable == false) { // checa se o conector tem prazo de cancelamento
+                    stImediata = true; // entra em multa
+                }
+
+                politicaList.add(new WSPoliticaCancelamento("Cancelamento",
+                        "",
+                        p.getPrice().getCurrency(),
+                        p.getPrice().getValue(),
+                        null,
+                        null,
+                        stImediata,
+                        dtMaximaCancelamento,
+                        null,
+                        !refundable));
+            }
 
             if (remarks != null) {
                 politicaList.add(new WSPoliticaVoucher("Remarks", remarks));

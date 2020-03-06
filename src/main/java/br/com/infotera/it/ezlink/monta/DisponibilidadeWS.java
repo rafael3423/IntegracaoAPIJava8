@@ -129,10 +129,9 @@ public class DisponibilidadeWS {
         /**
          * Abre a Lista de SearchResults para preencher WSHotelPesquisa
          */
-        try {
 
-            if (searchByHotelRS != null && searchByHotelRS.getSearchResponse() != null && searchByHotelRS.getSearchResponse().getSearchResults() != null) {
-
+        if (searchByHotelRS != null && searchByHotelRS.getSearchResponse() != null && searchByHotelRS.getSearchResponse().getSearchResults() != null) {
+            try {
                 for (SearchResults sr : searchByHotelRS.getSearchResponse().getSearchResults()) {//Abre a lista de SearchResults e roda no sr  
 
                     sqPesquisa++;
@@ -226,16 +225,15 @@ public class DisponibilidadeWS {
                             searchByHotelRS.getSearchResponse().getSearchToken()));
 
                 }
+            } catch (Exception ex) {
+                throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, "disponibilidade", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao consultar os hóteis disponiveis", WSIntegracaoStatusEnum.NEGADO, ex);
             }
-        } catch (Exception ex) {
-            throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, "disponibilidade", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao consultar os hóteis disponiveis", WSIntegracaoStatusEnum.NEGADO, ex);
+
+            /**
+             * Retorna para o infortravel a Lista de pesquisas de hotel, o
+             * integrado que foi enviado, e o status de integração como oK
+             */
         }
-
-        /**
-         * Retorna para o infortravel a Lista de pesquisas de hotel, o integrado
-         * que foi enviado, e o status de integração como oK
-         */
         return new WSDisponibilidadeHotelRS(hotelPesquisaList, disponibilidadeRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);
-
     }
 }

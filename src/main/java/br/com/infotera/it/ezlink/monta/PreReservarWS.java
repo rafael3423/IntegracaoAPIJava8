@@ -67,7 +67,7 @@ public class PreReservarWS {
                 roomMap.put(rm.getRoomId(), rm);
             }
         } catch (Exception ex) {
-            throw new ErrorException(preReservarRQ.getIntegrador(), PreReservarWS.class, "preReservar", WSMensagemErroEnum.HPR, "Ocorreu uma falha ao efetuar a pré reserva do quarto", WSIntegracaoStatusEnum.NEGADO, ex);
+            throw new ErrorException(preReservarRQ.getIntegrador(), PreReservarWS.class, "preReservar", WSMensagemErroEnum.HPR, "Ocorreu uma falha ao montar os quartos", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         try {
@@ -120,7 +120,7 @@ public class PreReservarWS {
                         rhu.setReservaNomeList(reservaNomeList);
                     }
                 } catch (Exception ex) {
-                    throw new ErrorException(preReservarRQ.getIntegrador(), PreReservarWS.class, "preReservar", WSMensagemErroEnum.HPR, "Ocorreu uma falha ao efetuar a pré reserva do quarto", WSIntegracaoStatusEnum.NEGADO, ex);
+                    throw new ErrorException(preReservarRQ.getIntegrador(), PreReservarWS.class, "preReservar", WSMensagemErroEnum.HPR, "Ocorreu uma falha ao montar lista de nomes", WSIntegracaoStatusEnum.NEGADO, ex);
                 }
                 reservaHotelUhList.add(new WSReservaHotelUh(sqQuarto++,
                         uh,

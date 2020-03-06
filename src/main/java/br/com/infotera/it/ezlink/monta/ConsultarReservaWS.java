@@ -147,7 +147,7 @@ public class ConsultarReservaWS {
                                 tarifaAdicionalList.add(new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.MULTA, "Multa de cancelamento", r.getPrice().getCurrency(), vlMulta));
                             }
                         } catch (Exception ex) {
-                            throw new ErrorException(integrador, UtilsWS.class, "montareserva", WSMensagemErroEnum.HCO, "Erro ao montar a tarifa de cancelamento", WSIntegracaoStatusEnum.INCONSISTENTE, ex);
+                            throw new ErrorException(integrador, ConsultarReservaWS.class, "montareserva", WSMensagemErroEnum.HCO, "Erro ao montar a tarifa de cancelamento", WSIntegracaoStatusEnum.INCONSISTENTE, ex);
                         }
 
                         WSTarifa tarifa = new WSTarifa(r.getPrice().getCurrency(),
@@ -186,7 +186,7 @@ public class ConsultarReservaWS {
                                         null));
                             }
                         } catch (Exception ex) {
-                            throw new ErrorException(integrador, UtilsWS.class, "montareserva", WSMensagemErroEnum.HCO, "Erro ao montar Lista de pax", WSIntegracaoStatusEnum.INCONSISTENTE, ex);
+                            throw new ErrorException(integrador, ConsultarReservaWS.class, "montareserva", WSMensagemErroEnum.HCO, "Erro ao montar Lista de pax", WSIntegracaoStatusEnum.INCONSISTENTE, ex);
                         }
 
                         WSReservaStatusEnum reservaStatusEnum = null;
@@ -202,7 +202,7 @@ public class ConsultarReservaWS {
                             reservaStatusEnum = WSReservaStatusEnum.CANCELADO;
                             qntCancelado++;
                         } else {
-                            throw new ErrorException(integrador, UtilsWS.class, "montareserva", WSMensagemErroEnum.HCO, "Erro ao ler status da reserva, status atual: " + r.getStatus(), WSIntegracaoStatusEnum.INCONSISTENTE, null);
+                            throw new ErrorException(integrador, ConsultarReservaWS.class, "montareserva", WSMensagemErroEnum.HCO, "Erro ao ler status da reserva, status atual: " + r.getStatus(), WSIntegracaoStatusEnum.INCONSISTENTE, null);
                         }
 
                         reservaHotelUh.add(new WSReservaHotelUh(sqQuarto,
@@ -216,7 +216,7 @@ public class ConsultarReservaWS {
 
                     }
                 } catch (Exception ex) {
-                    throw new ErrorException(integrador, UtilsWS.class, "montareserva", WSMensagemErroEnum.HCO, "Erro ao montar Rooms", WSIntegracaoStatusEnum.INCONSISTENTE, ex);
+                    throw new ErrorException(integrador, ConsultarReservaWS.class, "montareserva", WSMensagemErroEnum.HCO, "Erro ao montar Rooms", WSIntegracaoStatusEnum.INCONSISTENTE, ex);
                 }
 
                 if (sqQuarto == qntConfirmado) {
@@ -228,7 +228,7 @@ public class ConsultarReservaWS {
                 }
             }
         } catch (Exception ex) {
-            throw new ErrorException(integrador, UtilsWS.class, "montareserva", WSMensagemErroEnum.HCO, "Erro ao montar Hotels", WSIntegracaoStatusEnum.INCONSISTENTE, ex);
+            throw new ErrorException(integrador, ConsultarReservaWS.class, "montareserva", WSMensagemErroEnum.HCO, "Erro ao montar Hotels", WSIntegracaoStatusEnum.INCONSISTENTE, ex);
         }
 
         WSReservaHotel reservaHotel = new WSReservaHotel(null,

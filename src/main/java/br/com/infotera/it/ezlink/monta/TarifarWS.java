@@ -46,17 +46,20 @@ public class TarifarWS {
             for (WSReservaHotelUh rhuh : tarifarHotelRQ.getReservaHotel().getReservaHotelUhList()) {
 
                 List<WSReservaNome> reservaNomeList = new ArrayList();
+                try {
+                    for (WSReservaNome rn : rhuh.getReservaNomeList()) {
+                        reservaNomeList.add(new WSReservaNome(rn.getNmNome(),
+                                rn.getNmSobrenome(),
+                                rn.getPaxTipo(),
+                                rn.getDtNascimento(),
+                                rn.getQtIdade(),
+                                rn.getSexo(),
+                                rn.getDocumento(),
+                                rn.getId()));
 
-                for (WSReservaNome rn : rhuh.getReservaNomeList()) {
-                    reservaNomeList.add(new WSReservaNome(rn.getNmNome(),
-                            rn.getNmSobrenome(),
-                            rn.getPaxTipo(),
-                            rn.getDtNascimento(),
-                            rn.getQtIdade(),
-                            rn.getSexo(),
-                            rn.getDocumento(),
-                            rn.getId()));
-
+                    }
+                } catch (Exception ex) {
+                    throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifarHotel", WSMensagemErroEnum.HTA, "Ocorreu uma falha ao gerar tarifas", WSIntegracaoStatusEnum.NEGADO, ex);
                 }
 
                 String chvaPesqSplit[] = rhuh.getUh().getDsParametro().split("#");
@@ -80,7 +83,7 @@ public class TarifarWS {
                 configUhList.add(new WSConfigUh(reservaNomeList));
             }
         } catch (Exception ex) {
-            throw new ErrorException(tarifarHotelRQ.getIntegrador(), PreReservarWS.class, "tarifarHotel", WSMensagemErroEnum.HTA, "Ocorreu uma falha ao gerar tarifas", WSIntegracaoStatusEnum.NEGADO, ex);
+            throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifarHotel", WSMensagemErroEnum.HTA, "Ocorreu uma falha ao gerar tarifas", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         List<WSHotel> hotelList = new ArrayList();
@@ -99,7 +102,7 @@ public class TarifarWS {
 
         //montar um MAP para armazenar todo o resultado da busca
         Map<String, WSQuartoUh> mapQuartoUH = new HashMap();
-        
+
         try {
             for (WSHotelPesquisa hp : disponibilidadeHotelRS.getHotelPesquisaList()) {
                 int flag = 1;
@@ -129,7 +132,7 @@ public class TarifarWS {
                 }
             }
         } catch (Exception ex) {
-            throw new ErrorException(tarifarHotelRQ.getIntegrador(), PreReservarWS.class, "tarifarHotel", WSMensagemErroEnum.HTA, "Ocorreu uma falha ao gerar tarifas", WSIntegracaoStatusEnum.NEGADO, ex);
+            throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifarHotel", WSMensagemErroEnum.HTA, "Ocorreu uma falha ao gerar tarifas", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         String chvaPesqSplit[] = chavePesquisa.split("%");
@@ -153,7 +156,7 @@ public class TarifarWS {
 
             }
         } catch (Exception ex) {
-            throw new ErrorException(tarifarHotelRQ.getIntegrador(), PreReservarWS.class, "tarifarHotel", WSMensagemErroEnum.HTA, "Ocorreu uma falha ao gerar tarifas", WSIntegracaoStatusEnum.NEGADO, ex);
+            throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifarHotel", WSMensagemErroEnum.HTA, "Ocorreu uma falha ao gerar tarifas", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         WSReservaHotel reservaHotel = new WSReservaHotel(WSReservaStatusEnum.SOLICITACAO, null, reservaHotelUhList);
