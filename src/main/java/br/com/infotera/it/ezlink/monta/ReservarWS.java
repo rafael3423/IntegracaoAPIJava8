@@ -31,63 +31,63 @@ import java.util.List;
  * @author rafael
  */
 public class ReservarWS {
-
+    
     UtilsWS utilsWS = new UtilsWS();
     ChamaWS chamaWS = new ChamaWS();
     ConsultarReservaWS consultarReservaWS = new ConsultarReservaWS();
-
+    
     public WSReservarRS reservar(WSReservarRQ reservarRQ) throws ErrorException {
-
+        
         List<Room> roomList = new ArrayList();
-
+        
         try {
-
+            
             for (WSReservaHotelUh rhuh : reservarRQ.getReserva().getReservaHotel().getReservaHotelUhList()) {
-
+                
                 List<Pax> paxList = new ArrayList();
                 
                 try {
                     
                     for (WSReservaNome rn : rhuh.getReservaNomeList()) {
-
+                        
                         String paxTipo;
                         if (rn.getPaxTipo().equals(WSPaxTipoEnum.ADT)) {
                             paxTipo = "ADT";
                         } else {
                             paxTipo = "CHD";
                         }
-
+                        
                         paxList.add(new Pax(rn.getNmNome(), rn.getNmSobrenome(), rn.getQtIdade(), paxTipo));
-
+                        
                     }
                 } catch (Exception ex) {
                     throw new ErrorException(reservarRQ.getIntegrador(), ReservaRelatorioWS.class, "reserva", WSMensagemErroEnum.HRE, "Ocorreu uma falha ao efetuar a reserva do quarto ", WSIntegracaoStatusEnum.NEGADO, ex);
                 }
-
+                
                 String chvSplitRoomId[] = rhuh.getUh().getDsParametro().split("#");
                 String roomId = chvSplitRoomId[0];
-
+                
                 roomList.add(new Room(roomId, paxList));
-
+                
             }
-
+            
         } catch (Exception ex) {
             throw new ErrorException(reservarRQ.getIntegrador(), ReservaRelatorioWS.class, "reserva", WSMensagemErroEnum.HRE, "Ocorreu uma falha ao efetuar a reserva do quarto ", WSIntegracaoStatusEnum.NEGADO, ex);
         }
-
+        
         BookRQ bookRQ = new BookRQ(
                 reservarRQ.getReserva().getReservaHotel().getDsParametro(),
                 reservarRQ.getReserva().getId(),
                 roomList);
-
+        
         BookRS bookRS = chamaWS.chamadaPadrao(reservarRQ.getIntegrador(), bookRQ, BookRS.class);
-
+        
         WSReserva reserva = new WSReserva(new WSReservaHotel(bookRS.getBooking().getId().toString()));
-
+        reservarRQ.getIntegrador().setCdLocalizador(bookRS.getBooking().getId().toString());
         WSReservaRS reservaRS = consultarReservaWS.consultar(new WSReservaRQ(reservarRQ.getIntegrador(), reserva), false);
-
+        
         return new WSReservarRS(reservaRS.getReserva(), reservarRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);
-
+        
     }
-
+    
 }

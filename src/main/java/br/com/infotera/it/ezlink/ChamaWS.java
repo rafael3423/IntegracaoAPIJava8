@@ -170,7 +170,7 @@ public class ChamaWS {
 
                 } catch (Exception ex) {
 
-                    throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
+                    throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.INCONSISTENTE, ex);
                 }
 
             }
@@ -230,7 +230,7 @@ public class ChamaWS {
 
                 } catch (Exception ex) {
 
-                    throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.NEGADO, ex);
+                    throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro na chamada do metodo: " + metodo, WSIntegracaoStatusEnum.INCONSISTENTE, ex);
                 }
 
             }
@@ -295,7 +295,6 @@ public class ChamaWS {
 
 //            System.out.println("REQUEST--" + RQ + "-->" + request.toString()); // Printa o request que recebe do info e envia para o conector
 //            System.out.println("RESPONSE --" + RS + "-->" + response.toString());// Printa o response que vem do conecotr e envia para o info
-
             integrador.setIntegradorLogList(Utils.adicionaIntegradorLog(integrador,
                     WSIntegradorLogTipoEnum.JSON,
                     metodo,
@@ -326,7 +325,7 @@ public class ChamaWS {
 
                     }
                 }
-                throw new ErrorException(integrador, ChamaWS.class, "verificaErro", WSMensagemErroEnum.GENMETHOD, "Erro no conector: " + status + " - " + msgerro, WSIntegracaoStatusEnum.NEGADO, null);
+                throw new ErrorException(integrador, ChamaWS.class, "verificaErro", WSMensagemErroEnum.GENMETHOD, "Erro no conector: " + status + " - " + msgerro, WSIntegracaoStatusEnum.INCONSISTENTE, null);
 
             }
         }
