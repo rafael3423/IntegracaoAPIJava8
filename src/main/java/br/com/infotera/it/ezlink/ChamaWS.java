@@ -32,8 +32,6 @@ import br.com.infotera.it.ezlink.rqrs.SearchByHotelRQ;
 import br.com.infotera.it.ezlink.rqrs.SearchByHotelRS;
 import com.google.gson.Gson;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -51,7 +49,6 @@ public class ChamaWS {
 
         Long tempoInicio = System.currentTimeMillis();// mede o tempo que ira fazer a chamada DAS CONEXÕES
         Object objResponse = null;// cria um objeto vazio objResponse
-        Object objTest = null;
         Response r;
         String metodo = null;
         String endpoint;
