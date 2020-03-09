@@ -63,15 +63,21 @@ public class tarifarComRoomIdWS {
                 }
 
                 String chvaPesqSplit[] = rhuh.getUh().getDsParametro().split("#");
-                String roomId = chvaPesqSplit[0];
+                String refundable = chvaPesqSplit[1];
 
                 if (chavePesquisa != null) {
                     chavePesquisa = chavePesquisa + "%"
                             + sqUh++ + "#"
-                            + roomId;
+                            + rhuh.getUh().getDsUh() + "#"
+                            + rhuh.getRegime().getCdRegime()
+                            + "#" + rhuh.getRegime().getDsRegime()
+                            + "#" + refundable;
                 } else {
                     chavePesquisa = sqUh++ + "#"
-                            + roomId;
+                            + rhuh.getUh().getDsUh() + "#"
+                            + rhuh.getRegime().getCdRegime() + "#"
+                            + rhuh.getRegime().getDsRegime() + "#"
+                            + refundable;
                 }
 
                 configUhList.add(new WSConfigUh(reservaNomeList));
@@ -104,12 +110,22 @@ public class tarifarComRoomIdWS {
                     for (WSQuartoUh quh : q.getQuartoUhList()) {
 
                         String chvaPesqSplit[] = quh.getUh().getDsParametro().split("#");
-                        String roomId = chvaPesqSplit[0];
+                        String refundable = chvaPesqSplit[1];
 
                         String chaveUh = flag + "#"
-                                + roomId;
+                                + quh.getUh().getDsUh() + "#"
+                                + quh.getRegime().getCdRegime() + "#"
+                                + quh.getRegime().getDsRegime() + "#"
+                                + refundable;
 
-                        mapQuartoUH.put(chaveUh, quh);
+                        if (mapQuartoUH.get(chaveUh) != null) {
+                            WSQuartoUh quhMap = mapQuartoUH.get(chaveUh);
+                            if (quh.getTarifa().getVlNeto() <= quhMap.getTarifa().getVlNeto()) {
+                                mapQuartoUH.put(chaveUh, quh);
+                            }
+                        } else {
+                            mapQuartoUH.put(chaveUh, quh);
+                        }
                     }
                     flag++;
 
@@ -122,7 +138,6 @@ public class tarifarComRoomIdWS {
         String chvaPesqSplit[] = chavePesquisa.split("%");
 
         List<WSReservaHotelUh> reservaHotelUhList = new ArrayList();
-
         try {
             for (String chva : chvaPesqSplit) {
 

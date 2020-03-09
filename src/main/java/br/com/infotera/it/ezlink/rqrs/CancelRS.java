@@ -6,13 +6,13 @@
 package br.com.infotera.it.ezlink.rqrs;
 
 import br.com.infotera.it.ezlink.model.Booking;
-import br.com.infotera.it.ezlink.model.CancelledBooking;
+import br.com.infotera.it.ezlink.model.Erro;
 
 /**
  *
  * @author rafael
  */
-public class CancelRS {
+public class CancelRS extends Erro{
 
     private Booking cancelledBooking;
 

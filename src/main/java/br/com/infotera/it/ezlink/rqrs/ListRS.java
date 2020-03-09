@@ -6,12 +6,13 @@
 package br.com.infotera.it.ezlink.rqrs;
 
 import br.com.infotera.it.ezlink.model.BookingListResponse;
+import br.com.infotera.it.ezlink.model.Erro;
 
 /**
  *
  * @author rafael
  */
-public class ListRS {
+public class ListRS extends Erro{
 
     private BookingListResponse bookingListResponse;
 

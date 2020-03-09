@@ -39,7 +39,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * 
+ *
  *
  * @author rafael
  */
@@ -285,29 +285,37 @@ public class ChamaWS {
         return retorno.cast(objResponse);
     }
 
-    public void verificaErro(WSIntegrador integrador, Object objeto, int status) throws ErrorException {
+    public void verificaErro(WSIntegrador integrador, Object objetoErro, int status) throws ErrorException {
         {
 
-            Erro erro = (Erro) objeto;
-            String msgerro = null;
+            Erro erro = (Erro) objetoErro;
+            String msgErro = null;
 
             if (status != 200) {
-                for (Errors errors : erro.getErrors()) {
+                if (erro.getErrors() != null) {
+                    for (Errors errors : erro.getErrors()) {
+                        for (String message : errors.getMessages()) {
 
-                    for (String message : errors.getMessages()) {
-
-                        if (msgerro == null) {
-                            msgerro = message;
-                        } else {
-                            msgerro = msgerro + message;
+                            if (msgErro == null) {
+                                msgErro = message;
+                            } else {
+                                msgErro = msgErro + message;
+                            }
                         }
-
                     }
+                } else {
+                    if (erro.getMessage() != null) {
+                        if (erro.getMessage().equals("searchToken not Found, it may have expired it lasts 72 Hours")) {
+                            msgErro = "Prazo para reservar expirado. Refaça o processo.";
+                        } else {
+                            msgErro = erro.getMessage();
+                        }
+                    } else {
+                        msgErro = "Erro não retornado pelo conector";
+                    }
+                    throw new ErrorException(integrador, ChamaWS.class, "verificaErro", WSMensagemErroEnum.GENMETHOD, "Erro no conector: " + status + " - " + msgErro, WSIntegracaoStatusEnum.INCONSISTENTE, null);
                 }
-                throw new ErrorException(integrador, ChamaWS.class, "verificaErro", WSMensagemErroEnum.GENMETHOD, "Erro no conector: " + status + " - " + msgerro, WSIntegracaoStatusEnum.INCONSISTENTE, null);
-
             }
         }
-
     }
 }

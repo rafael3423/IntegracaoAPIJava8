@@ -5,13 +5,14 @@
  */
 package br.com.infotera.it.ezlink.rqrs;
 
+import br.com.infotera.it.ezlink.model.Erro;
 import br.com.infotera.it.ezlink.model.QuoteResponse;
 
 /**
  *
  * @author rafael
  */
-public class QuoteRS {
+public class QuoteRS extends Erro{
 
     private QuoteResponse quoteResponse;
 

@@ -130,12 +130,12 @@ public class EzlinkWS implements HotelImpl {
     }
 
     @Override
-    public WSIntegrador login(WSIntegrador wsi) throws ErrorException {
+    public WSDestinoRS listaDestino(WSDestinoRQ wsdrq) throws ErrorException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public WSDestinoRS listaDestino(WSDestinoRQ wsdrq) throws ErrorException {
+    public WSIntegrador login(WSIntegrador wsi) throws ErrorException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
